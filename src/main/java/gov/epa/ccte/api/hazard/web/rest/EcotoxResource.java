@@ -45,7 +45,7 @@ public class EcotoxResource {
     public @ResponseBody
     List<EcotoxDto> ecotoxdByDtxsid(@PathVariable("dtxsid") String dtxsid) {
 
-        log.debug("all hazard for dtxsid = {}", dtxsid);
+        log.debug("all ecotox for dtxsid = {}", dtxsid);
 
         List<Ecotox> data = repository.findAllByDtxsid(dtxsid);
 
