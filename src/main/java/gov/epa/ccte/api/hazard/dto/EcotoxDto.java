@@ -13,178 +13,116 @@ public class EcotoxDto {
 
     @NotNull
     private final Integer id;
-
     @Size(max = 120)
-    private String author;
-
-    private Integer casNumber;
-
+    private final String author;
+    private final Integer casNumber;
     @Size(max = 240)
-    private String chemicalAnalysisMethod;
-
+    private final String chemicalAnalysisMethod;
     @Size(max = 1000)
-    private String chemicalGrade;
-
+    private final String chemicalGrade;
     @Size(max = 1000)
-    private String chemicalName;
-
+    private final String chemicalName;
     @Size(max = 4000)
-    private String chemicalPurity;
-
-    private String concOneAuthor;
-
+    private final String chemicalPurity;
+    private final String concOneAuthor;
     @Size(max = 21)
-    private String concOneMax;
-
+    private final String concOneMax;
     @Size(max = 2)
-    private String concOneMaxOp;
-
+    private final String concOneMaxOp;
     @Size(max = 21)
-    private String concOneMean;
-
+    private final String concOneMean;
     @Size(max = 2)
-    private String concOneMeanOp;
-
+    private final String concOneMeanOp;
     @Size(max = 1000)
-    private String concOneMeanStd;
-
+    private final String concOneMeanStd;
     @Size(max = 21)
-    private String concOneMin;
-
+    private final String concOneMin;
     @Size(max = 2)
-    private String concOneMinOp;
-
+    private final String concOneMinOp;
     @Size(max = 1000)
-    private String concOneTypeStd;
-
+    private final String concOneTypeStd;
     @Size(max = 20)
-    private String concOneUnitsAuthor;
-
+    private final String concOneUnitsAuthor;
     @Size(max = 1000)
-    private String concOneUnitsStd;
-
+    private final String concOneUnitsStd;
     @Size(max = 240)
-    private String controlType;
-
+    private final String controlType;
     @Size(max = 255)
-    private String dsstoxCasrn;
-
+    private final String dsstoxCasrn;
     @Size(max = 45)
-    private String dsstoxCompoundId;
-
+    private final String dsstoxCompoundId;
     @Size(max = 255)
-    private String dsstoxPreferredName;
-
+    private final String dsstoxPreferredName;
     @Size(max = 45)
-    private String dtxsid;
-
+    private final String dtxsid;
     @Size(max = 240)
-    private String effect;
-
-    private String effectGroupLevel;
-
+    private final String effect;
+    private final String effectGroupLevel;
     @Size(max = 240)
-    private String effectMeasurement;
-
+    private final String effectMeasurement;
     @Size(max = 240)
-    private String endpoint;
-
-    private String exposureGroup;
-
+    private final String endpoint;
+    private final String exposureGroup;
     @Size(max = 960)
-    private String exposureType;
-
-    private String habitat;
-
+    private final String exposureType;
+    private final String habitat;
     @Size(max = 240)
-    private String mediaType;
-
+    private final String mediaType;
     @Size(max = 255)
-    private String molFrml;
-
-    private Integer ncbiTaxId;
-
+    private final String molFrml;
+    private final Integer ncbiTaxId;
     @Size(max = 4000)
-    private String numberDoses;
-
+    private final String numberDoses;
     @Size(max = 11)
-    private String observDurationMax;
-
+    private final String observDurationMax;
     @Size(max = 2)
-    private String observDurationMaxOp;
-
+    private final String observDurationMaxOp;
     @Size(max = 11)
-    private String observDurationMean;
-
+    private final String observDurationMean;
     @Size(max = 2)
-    private String observDurationMeanOp;
-
+    private final String observDurationMeanOp;
     @Size(max = 11)
-    private String observDurationMin;
-
+    private final String observDurationMin;
     @Size(max = 2)
-    private String observDurationMinOp;
-
+    private final String observDurationMinOp;
     @Size(max = 20)
-    private String observDurationUnit;
-
+    private final String observDurationUnit;
     @Size(max = 240)
-    private String observDurationUnitDesc;
-
-    private String observDurationStd;
-
+    private final String observDurationUnitDesc;
+    private final String observDurationStd;
     @Size(max = 4000)
-    private String observDurationUnitsStd;
-
+    private final String observDurationUnitsStd;
     @Size(max = 1000)
-    private String organismAge;
-
+    private final String organismAge;
     @Size(max = 240)
-    private String organismAgeUnits;
-
+    private final String organismAgeUnits;
     @Size(max = 240)
-    private String organismLifestage;
-
+    private final String organismLifestage;
     @Size(max = 4)
-    private String publicationYear;
-
-    private Integer referenceNumber;
-
+    private final String publicationYear;
+    private final Integer referenceNumber;
     @Size(max = 240)
-    private String responseSite;
-
-    private Integer resultNumber;
-
+    private final String responseSite;
+    private final Integer resultNumber;
     @Size(max = 20)
-    private String resultSampleUnit;
-
+    private final String resultSampleUnit;
     @Size(max = 240)
-    private String resultSampleUnitDesc;
-
+    private final String resultSampleUnitDesc;
     @Size(max = 255)
-    private String source;
-
+    private final String source;
     @Size(max = 60)
-    private String speciesCommonName;
-
+    private final String speciesCommonName;
     @Size(max = 1000)
-    private String speciesGroup;
-
-    private Integer speciesNumber;
-
+    private final String speciesGroup;
+    private final Integer speciesNumber;
     @Size(max = 1000)
-    private String speciesScientificName;
-
-    private String summaryAdditionalParameters;
-
+    private final String speciesScientificName;
+    private final String summaryAdditionalParameters;
     @Size(max = 1000)
-    private String testLocation;
-
+    private final String testLocation;
     @Size(max = 4000)
-    private String testMethodComment;
-
-    private Integer testNumber;
-
+    private final String testMethodComment;
+    private final Integer testNumber;
     @Size(max = 220)
-    private String title;
+    private final String title;
 }
