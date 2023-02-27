@@ -12,22 +12,16 @@ import javax.validation.constraints.Size;
 @Data
 public class CancerSummaryDto {
     @NotNull
-    private Integer id;
-
+    private final Integer id;
     @Size(max = 255)
-    private String cancerCall;
-
+    private final String cancerCall;
     @Size(max = 255)
-    private String dtxsid;
-
+    private final String dtxsid;
     @Size(max = 255)
-    private String exposureRoute;
-
-    private Long rn;
-
+    private final String exposureRoute;
+    private final Long rn;
     @Size(max = 255)
-    private String source;
-
+    private final String source;
     @Size(max = 255)
-    private String url;
+    private final String url;
 }
