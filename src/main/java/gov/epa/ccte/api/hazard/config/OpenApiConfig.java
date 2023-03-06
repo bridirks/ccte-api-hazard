@@ -13,16 +13,14 @@ import io.swagger.v3.oas.annotations.servers.Server;
 //@Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "CCTE Hazard APIs",
+                title = "Computational Toxicology and Exposure Data APIs - Hazard",
                 description = "This is the part of CCTE Public APIs and provides hazard data through a set of API endpoints. User has the option to get all the data or only data related to human health or related to eco tox.",
                 contact = @Contact(
-                        name = "Asif Rashid",
+                        name = "",
                         url = "",
-                        email = "rashid.asif@epa.gov"
-                ),
-                license = @License(
-                        name = "No Licence",
-                        url = "")),
+                        email = "ccte_api@epa.gov"),
+                version = "1.0.0"
+        ),
         servers = @Server(url = "http://api-ccte.epa.gov")
 )
 @SecurityScheme(
