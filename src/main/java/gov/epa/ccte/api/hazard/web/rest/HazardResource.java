@@ -7,6 +7,10 @@ import gov.epa.ccte.api.hazard.dto.mapper.HazardMapper;
 import gov.epa.ccte.api.hazard.repository.HazardRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +31,6 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin
 public class HazardResource {
-
     final private HazardRepository repository;
     final private HazardMapper mapper;
     public HazardResource(HazardRepository repository, HazardMapper mapper) {
@@ -43,6 +46,13 @@ public class HazardResource {
      */
     @Operation(summary = "Get hazard (both human and eco) data by dtxsid")
     @RequestMapping(value = "hazard/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
+    @ApiResponses(value= {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
+            {
+                    @ExampleObject(name = "200-found", ref = "#/components/examples/DTXSID0021125"),
+                    @ExampleObject(name = "200-not-found", ref = "#/components/examples/DTXSID70201821"),
+            }))
+    })
     public @ResponseBody
     List<HazardDto> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
                                    @PathVariable("dtxsid") String dtxsid) throws IOException {
@@ -86,7 +96,8 @@ public class HazardResource {
     @Operation(summary = "Get Ecotox data by dtxsid")
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
     public @ResponseBody
-    List<HazardDto> ecoHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
+    List<HazardDto> ecoHazardByDtxsid(
+            @Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
                                       @PathVariable("dtxsid") String dtxsid) throws IOException {
 
         log.debug("eco hazard for dtxsid = {}", dtxsid);

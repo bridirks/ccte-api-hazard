@@ -9,6 +9,7 @@ import gov.epa.ccte.api.hazard.dto.mapper.EcotoxMapper;
 import gov.epa.ccte.api.hazard.repository.CancerSummaryRepository;
 import gov.epa.ccte.api.hazard.repository.EcotoxRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +49,7 @@ public class CancerSummaryResource {
     @Operation(summary = "Get cancer summary (both human and eco) data by dtxsid")
     @GetMapping(value = "hazard/cancer-summary/search/by-dtxsid/{dtxsid}")
     public @ResponseBody
-    List<CancerSummaryDto> cancerSummaryByDtxsid(@PathVariable("dtxsid") String dtxsid) {
+    List<CancerSummaryDto> cancerSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all cancer summary for dtxsid = {}", dtxsid);
 

@@ -5,6 +5,7 @@ import gov.epa.ccte.api.hazard.dto.SkinEyeDto;
 import gov.epa.ccte.api.hazard.dto.mapper.SkinEyeMapper;
 import gov.epa.ccte.api.hazard.repository.SkinEyeRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class SkinEyeResource {
     @Operation(summary = "Get skin eye (both human and eco) data by dtxsid")
     @GetMapping(value = "/hazard/skin-eye/search/by-dtxsid/{dtxsid}")
     public @ResponseBody
-    List<SkinEyeDto> skinEyedByDtxsid(@PathVariable("dtxsid") String dtxsid) {
+    List<SkinEyeDto> skinEyedByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all skin eye for dtxsid = {}", dtxsid);
 
