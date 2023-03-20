@@ -5,6 +5,11 @@ import gov.epa.ccte.api.hazard.dto.EcotoxDto;
 import gov.epa.ccte.api.hazard.dto.mapper.EcotoxMapper;
 import gov.epa.ccte.api.hazard.repository.EcotoxRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -42,8 +47,15 @@ public class EcotoxResource {
      */
     @Operation(summary = "Get ecotox (both human and eco) data by dtxsid")
     @GetMapping(value = "/ecotox/search/by-dtxsid/{dtxsid}")
+    @ApiResponses(value= {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
+                    {
+                            @ExampleObject(name = "200-found-ecotox", ref = "#/components/examples/ecotox-search-by-dtxsid-DTXSID0021125"),
+                            @ExampleObject(name = "200-ecotox-search-not-found", ref = "#/components/examples/empty-result-set"),
+                    }))
+    })
     public @ResponseBody
-    List<EcotoxDto> ecotoxdByDtxsid(@PathVariable("dtxsid") String dtxsid) {
+    List<EcotoxDto> ecotoxdByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all ecotox for dtxsid = {}", dtxsid);
 
