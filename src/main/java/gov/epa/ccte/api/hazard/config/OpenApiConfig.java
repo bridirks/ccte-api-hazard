@@ -23,15 +23,17 @@ import java.util.Map;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Computational Toxicology and Exposure Data APIs - Hazard",
-                description = "This is the part of CCTE Public APIs and provides hazard data through a set of API endpoints. User has the option to get all the data or only data related to human health or related to eco tox.",
+                description = "The Hazard APIs are part of a set of public computational toxicology and exposure APIs and provide hazard data through a set of API endpoints. Users have the option to get all the data or only data related to human health or related to ecotoxicology.",
                 contact = @Contact(
                         name = "",
                         url = "",
-                        email = "ccte_api@epa.gov"),
+                        email = ""),
                 version = "1.0.0"
         ),
-        servers = @Server(url = "http://api-ccte.epa.gov")
-)
+        servers = { @Server(url = "https://api-ccte.epa.gov", description = "Production Environment"),
+                @Server(url = "https://ccte-api-s.epa.gov", description = "Staging Environment")
+        }
+        )
 @SecurityScheme(
         type = SecuritySchemeType.APIKEY,
         name = "api_key",
