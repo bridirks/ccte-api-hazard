@@ -55,7 +55,7 @@ public class SkinEyeResource {
                     }))
     })
     public @ResponseBody
-    List<SkinEyeDto> skinEyedByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") @PathVariable("dtxsid") String dtxsid) {
+    List<SkinEyeDto> skinEyedByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all skin eye for dtxsid = {}", dtxsid);
 
