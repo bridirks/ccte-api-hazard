@@ -1,0 +1,57 @@
+[
+  {
+    "description": "Example Result set(Skin Eye data) for DTXSID0021125 (Phenolphthalein)",
+    "summary": "DTXSID0021125",
+    "identifier": "hazard-search-skineye-by-dtxsid-DTXSID0021125",
+    "results": [
+      {
+        "id": 30471,
+        "classification": "Classification not possible",
+        "dtxsid": "DTXSID0021125",
+        "endpoint": "Skin Sensitization",
+        "guideline": "-",
+        "reliability": "-",
+        "resultText": "- - Score of N/A was assigned based on a classification of \"Classification not possible\"",
+        "rn": 1,
+        "score": "NC",
+        "source": "Japan",
+        "species": "-",
+        "strain": "-",
+        "studyType": "-",
+        "year": -1
+      },
+      {
+        "id": 30469,
+        "classification": "Classification not possible",
+        "dtxsid": "DTXSID0021125",
+        "endpoint": "Eye Irritation",
+        "guideline": "-",
+        "reliability": "-",
+        "resultText": "- - Score of N/A was assigned based on a classification of \"Classification not possible\"",
+        "rn": 1,
+        "score": "NC",
+        "source": "Japan",
+        "species": "-",
+        "strain": "-",
+        "studyType": "-",
+        "year": -1
+      },
+      {
+        "id": 30470,
+        "classification": "Classification not possible",
+        "dtxsid": "DTXSID0021125",
+        "endpoint": "Skin Irritation",
+        "guideline": "-",
+        "reliability": "-",
+        "resultText": "- - Score of N/A was assigned based on a classification of \"Classification not possible\"",
+        "rn": 1,
+        "score": "NC",
+        "source": "Japan",
+        "species": "-",
+        "strain": "-",
+        "studyType": "-",
+        "year": -1
+      }
+    ]
+  }
+]

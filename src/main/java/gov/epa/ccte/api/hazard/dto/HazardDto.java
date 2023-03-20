@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class HazardDto implements Serializable {
+
     @NotNull
     private final Integer id;
     @Size(max = 45)

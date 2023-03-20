@@ -48,7 +48,8 @@ public class OpenApiConfig {
         public OpenApiCustomiser openApiCustomiser(Collection<Map.Entry<String, List<Example>>> examples) {
                 return openAPI -> examples.forEach(example -> {
                         for(Example e : example.getValue()){
-                                openAPI.getComponents().addExamples(e.getSummary(), e);
+                                String referenceKeyName = e.get$ref().substring(e.get$ref().lastIndexOf("/") + 1);
+                                openAPI.getComponents().addExamples(referenceKeyName, e);
                         }
                 });
         }

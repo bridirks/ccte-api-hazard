@@ -49,8 +49,8 @@ public class HazardResource {
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
             {
-                    @ExampleObject(name = "200-found", ref = "#/components/examples/DTXSID0021125"),
-                    @ExampleObject(name = "200-not-found", ref = "#/components/examples/DTXSID70201821"),
+                    @ExampleObject(name = "200-found-hazard", ref = "#/components/examples/hazard-by-dtxsid-DTXSID0021125"),
+                    @ExampleObject(name = "200-hazard-search-not-found", ref = "#/components/examples/empty-result-set"),
             }))
     })
     public @ResponseBody
@@ -74,6 +74,13 @@ public class HazardResource {
      */
     @Operation(summary = "Get human hazard data by dtxsid")
     @RequestMapping(value = "hazard/human/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
+    @ApiResponses(value= {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
+                    {
+                            @ExampleObject(name = "200-found-hazard-human", ref = "#/components/examples/hazard-search-human-by-dtxsid-DTXSID0021125"),
+                            @ExampleObject(name = "200-hazard-search-human-not-found", ref = "#/components/examples/empty-result-set"),
+                    }))
+    })
     public @ResponseBody
     List<HazardDto> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
                                         @PathVariable("dtxsid") String dtxsid) throws IOException {
@@ -95,6 +102,13 @@ public class HazardResource {
      */
     @Operation(summary = "Get Ecotox data by dtxsid")
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
+    @ApiResponses(value= {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
+                    {
+                            @ExampleObject(name = "200-found-ecotox", ref = "#/components/examples/hazard-search-ecotox-by-dtxsid-DTXSID0021125"),
+                            @ExampleObject(name = "200-hazard-search-ecotox-not-found", ref = "#/components/examples/empty-result-set"),
+                    }))
+    })
     public @ResponseBody
     List<HazardDto> ecoHazardByDtxsid(
             @Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
