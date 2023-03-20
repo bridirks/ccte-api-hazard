@@ -55,7 +55,7 @@ public class EcotoxResource {
                     }))
     })
     public @ResponseBody
-    List<EcotoxDto> ecotoxdByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") @PathVariable("dtxsid") String dtxsid) {
+    List<EcotoxDto> ecotoxdByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all ecotox for dtxsid = {}", dtxsid);
 

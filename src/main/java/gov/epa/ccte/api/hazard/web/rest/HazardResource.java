@@ -54,7 +54,7 @@ public class HazardResource {
             }))
     })
     public @ResponseBody
-    List<HazardDto> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
+    List<HazardDto> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                    @PathVariable("dtxsid") String dtxsid) throws IOException {
 
         log.debug("all hazard for dtxsid = {}", dtxsid);
@@ -82,7 +82,7 @@ public class HazardResource {
                     }))
     })
     public @ResponseBody
-    List<HazardDto> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
+    List<HazardDto> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                         @PathVariable("dtxsid") String dtxsid) throws IOException {
 
         log.debug("human hazard for dtxsid = {}", dtxsid);
@@ -111,7 +111,7 @@ public class HazardResource {
     })
     public @ResponseBody
     List<HazardDto> ecoHazardByDtxsid(
-            @Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182")
+            @Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                       @PathVariable("dtxsid") String dtxsid) throws IOException {
 
         log.debug("eco hazard for dtxsid = {}", dtxsid);
