@@ -6,7 +6,6 @@ import gov.epa.ccte.api.hazard.springdocexamples.ecotox.EcotoxExample;
 import gov.epa.ccte.api.hazard.springdocexamples.hazard.HazardExample;
 import gov.epa.ccte.api.hazard.springdocexamples.skineye.SkinEyeExample;
 import io.swagger.v3.oas.models.examples.Example;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
