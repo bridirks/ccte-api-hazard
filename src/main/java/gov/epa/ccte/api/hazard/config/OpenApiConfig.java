@@ -31,7 +31,7 @@ import java.util.Map;
                 version = "1.0.0"
         ),
         servers = { @Server(url = "https://api-ccte.epa.gov", description = "Production Environment"),
-                @Server(url = "https://ccte-api-s.epa.gov", description = "Staging Environment")
+                @Server(url = "https://api-ccte-stg.epa.gov", description = "Staging Environment")
         }
         )
 @SecurityScheme(
