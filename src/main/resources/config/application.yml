@@ -61,7 +61,7 @@ server:
     session:
       cookie:
         http-only: true
-  port: 9301
+  port: 9300
   shutdown: graceful # this will allow to finish currently processing requrst before shutdown. THis is very important for cloud/Kube environment
 
 # ===================================================================
