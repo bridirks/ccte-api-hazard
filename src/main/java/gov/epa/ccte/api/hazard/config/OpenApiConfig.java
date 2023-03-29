@@ -44,6 +44,13 @@ public class OpenApiConfig {
         @Autowired
         SwaggerExampleObject swaggerExampleObject;
 
+        /**
+         * Inject response examples from resources/examples/. This is a workaround due to externalValue
+         * not propagating properly through current ui tools(such as swagger/spotlight).
+         * https://github.com/springdoc/springdoc-openapi/issues/17
+         * https://github.com/springdoc/springdoc-openapi/blob/master/springdoc-openapi-javadoc/src/test/java/test/org/springdoc/api/app90/SpringDocTestApp.java
+         * TODO: Refactor to externalValue on ExampleObject once tools are updated with proper fixes.
+         */
         @Bean
         public OpenApiCustomiser openApiCustomiser(Collection<Map.Entry<String, List<Example>>> examples) {
                 return openAPI -> examples.forEach(example -> {

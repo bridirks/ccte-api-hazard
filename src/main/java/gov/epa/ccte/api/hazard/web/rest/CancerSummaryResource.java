@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @SecurityRequirement(name = "api_key")
 @Slf4j
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class CancerSummaryResource {
 
     private final CancerSummaryRepository repository;
@@ -55,8 +55,8 @@ public class CancerSummaryResource {
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
                     {
-                            @ExampleObject(name = "200-found-cancer-summary", ref = "#/components/examples/hazard-search-cancer-summary-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "200-hazard-cancer-summary-search-not-found", ref = "#/components/examples/empty-result-set"),
+                            @ExampleObject(name = "DTXSID0021125", ref = "#/components/examples/hazard-search-cancer-summary-by-dtxsid-DTXSID0021125"),
+                            @ExampleObject(name = "Not found", ref = "#/components/examples/empty-result-set"),
                     }))
     })
     public @ResponseBody

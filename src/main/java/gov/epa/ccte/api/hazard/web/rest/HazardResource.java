@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @SecurityRequirement(name = "api_key")
 @Slf4j
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class HazardResource {
     final private HazardRepository repository;
     final private HazardMapper mapper;
@@ -49,8 +49,8 @@ public class HazardResource {
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
             {
-                    @ExampleObject(name = "200-found-hazard", ref = "#/components/examples/hazard-by-dtxsid-DTXSID0021125"),
-                    @ExampleObject(name = "200-hazard-search-not-found", ref = "#/components/examples/empty-result-set"),
+                    @ExampleObject(name = "DTXSID0021125", ref = "#/components/examples/hazard-by-dtxsid-DTXSID0021125"),
+                    @ExampleObject(name = "Not Found", ref = "#/components/examples/empty-result-set"),
             }))
     })
     public @ResponseBody
@@ -77,8 +77,8 @@ public class HazardResource {
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
                     {
-                            @ExampleObject(name = "200-found-hazard-human", ref = "#/components/examples/hazard-search-human-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "200-hazard-search-human-not-found", ref = "#/components/examples/empty-result-set"),
+                            @ExampleObject(name = "DTXSID0021125", ref = "#/components/examples/hazard-search-human-by-dtxsid-DTXSID0021125"),
+                            @ExampleObject(name = "Not Found", ref = "#/components/examples/empty-result-set"),
                     }))
     })
     public @ResponseBody
@@ -105,8 +105,8 @@ public class HazardResource {
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
                     {
-                            @ExampleObject(name = "200-found-ecotox", ref = "#/components/examples/hazard-search-ecotox-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "200-hazard-search-ecotox-not-found", ref = "#/components/examples/empty-result-set"),
+                            @ExampleObject(name = "DTXSID0021125", ref = "#/components/examples/hazard-search-ecotox-by-dtxsid-DTXSID0021125"),
+                            @ExampleObject(name = "Not Found", ref = "#/components/examples/empty-result-set"),
                     }))
     })
     public @ResponseBody

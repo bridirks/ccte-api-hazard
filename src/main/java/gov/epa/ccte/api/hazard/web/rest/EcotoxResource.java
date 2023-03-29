@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @SecurityRequirement(name = "api_key")
 @Slf4j
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class EcotoxResource {
 
     private final EcotoxRepository repository;
@@ -50,8 +50,8 @@ public class EcotoxResource {
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
                     {
-                            @ExampleObject(name = "200-found-ecotox", ref = "#/components/examples/ecotox-search-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "200-ecotox-search-not-found", ref = "#/components/examples/empty-result-set"),
+                            @ExampleObject(name = "DTXSID0021125", ref = "#/components/examples/ecotox-search-by-dtxsid-DTXSID0021125"),
+                            @ExampleObject(name = "Not Found", ref = "#/components/examples/empty-result-set"),
                     }))
     })
     public @ResponseBody
