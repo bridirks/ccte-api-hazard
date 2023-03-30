@@ -6,10 +6,6 @@ import gov.epa.ccte.api.hazard.dto.mapper.SkinEyeMapper;
 import gov.epa.ccte.api.hazard.repository.SkinEyeRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +23,7 @@ import java.util.stream.Collectors;
 @SecurityRequirement(name = "api_key")
 @Slf4j
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class SkinEyeResource {
 
     private final SkinEyeRepository repository;
@@ -47,13 +43,6 @@ public class SkinEyeResource {
      */
     @Operation(summary = "Get skin eye (both human and eco) data by dtxsid")
     @GetMapping(value = "/hazard/skin-eye/search/by-dtxsid/{dtxsid}")
-    @ApiResponses(value= {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
-                    {
-                            @ExampleObject(name = "200-found-skineye", ref = "#/components/examples/hazard-search-skineye-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "200-hazard-skineye-search-not-found", ref = "#/components/examples/empty-result-set"),
-                    }))
-    })
     public @ResponseBody
     List<SkinEyeDto> skinEyedByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 

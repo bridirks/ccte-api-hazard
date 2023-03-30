@@ -7,10 +7,6 @@ import gov.epa.ccte.api.hazard.dto.mapper.HazardMapper;
 import gov.epa.ccte.api.hazard.repository.HazardRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +25,7 @@ import java.util.stream.Collectors;
 @SecurityRequirement(name = "api_key")
 @Slf4j
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class HazardResource {
     final private HazardRepository repository;
     final private HazardMapper mapper;
@@ -46,13 +42,6 @@ public class HazardResource {
      */
     @Operation(summary = "Get hazard (both human and eco) data by dtxsid")
     @RequestMapping(value = "hazard/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
-    @ApiResponses(value= {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
-            {
-                    @ExampleObject(name = "200-found-hazard", ref = "#/components/examples/hazard-by-dtxsid-DTXSID0021125"),
-                    @ExampleObject(name = "200-hazard-search-not-found", ref = "#/components/examples/empty-result-set"),
-            }))
-    })
     public @ResponseBody
     List<HazardDto> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                    @PathVariable("dtxsid") String dtxsid) throws IOException {
@@ -74,13 +63,6 @@ public class HazardResource {
      */
     @Operation(summary = "Get human hazard data by dtxsid")
     @RequestMapping(value = "hazard/human/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
-    @ApiResponses(value= {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
-                    {
-                            @ExampleObject(name = "200-found-hazard-human", ref = "#/components/examples/hazard-search-human-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "200-hazard-search-human-not-found", ref = "#/components/examples/empty-result-set"),
-                    }))
-    })
     public @ResponseBody
     List<HazardDto> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                         @PathVariable("dtxsid") String dtxsid) throws IOException {
@@ -102,13 +84,6 @@ public class HazardResource {
      */
     @Operation(summary = "Get Ecotox data by dtxsid")
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
-    @ApiResponses(value= {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
-                    {
-                            @ExampleObject(name = "200-found-ecotox", ref = "#/components/examples/hazard-search-ecotox-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "200-hazard-search-ecotox-not-found", ref = "#/components/examples/empty-result-set"),
-                    }))
-    })
     public @ResponseBody
     List<HazardDto> ecoHazardByDtxsid(
             @Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
