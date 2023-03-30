@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-@Table(name = "cancer_summary_vw")
+@Table(name = "cancer_summary")
 public class CancerSummary {
     @Id
     @NotNull
