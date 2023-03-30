@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.config;
 
-import gov.epa.ccte.api.hazard.config.swagger.SwaggerExampleObject;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -8,15 +7,8 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
-import io.swagger.v3.oas.models.examples.Example;
-import org.springdoc.core.customizers.OpenApiCustomiser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 
 @Configuration
@@ -40,25 +32,4 @@ import java.util.Map;
         paramName = "x-api-key"
 )
 public class OpenApiConfig {
-
-        @Autowired
-        SwaggerExampleObject swaggerExampleObject;
-
-        /**
-         * Inject response examples from resources/examples/. This is a workaround due to externalValue
-         * not propagating properly through current ui tools(such as swagger/spotlight).
-         * https://github.com/springdoc/springdoc-openapi/issues/17
-         * https://github.com/springdoc/springdoc-openapi/blob/master/springdoc-openapi-javadoc/src/test/java/test/org/springdoc/api/app90/SpringDocTestApp.java
-         * TODO: Refactor to externalValue on ExampleObject once tools are updated with proper fixes.
-         */
-        @Bean
-        public OpenApiCustomiser openApiCustomiser(Collection<Map.Entry<String, List<Example>>> examples) {
-                return openAPI -> examples.forEach(example -> {
-                        for(Example e : example.getValue()){
-                                String referenceKeyName = e.get$ref().substring(e.get$ref().lastIndexOf("/") + 1);
-                                openAPI.getComponents().addExamples(referenceKeyName, e);
-                        }
-                });
-        }
-
 }

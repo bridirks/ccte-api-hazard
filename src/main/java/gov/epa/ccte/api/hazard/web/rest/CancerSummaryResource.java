@@ -1,19 +1,11 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
 import gov.epa.ccte.api.hazard.domain.CancerSummary;
-import gov.epa.ccte.api.hazard.domain.Ecotox;
 import gov.epa.ccte.api.hazard.dto.CancerSummaryDto;
-import gov.epa.ccte.api.hazard.dto.EcotoxDto;
 import gov.epa.ccte.api.hazard.dto.mapper.CancerSummaryMapper;
-import gov.epa.ccte.api.hazard.dto.mapper.EcotoxMapper;
 import gov.epa.ccte.api.hazard.repository.CancerSummaryRepository;
-import gov.epa.ccte.api.hazard.repository.EcotoxRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -52,13 +44,6 @@ public class CancerSummaryResource {
      */
     @Operation(summary = "Get cancer summary (both human and eco) data by dtxsid")
     @GetMapping(value = "hazard/cancer-summary/search/by-dtxsid/{dtxsid}")
-    @ApiResponses(value= {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(examples =
-                    {
-                            @ExampleObject(name = "DTXSID0021125", ref = "#/components/examples/hazard-search-cancer-summary-by-dtxsid-DTXSID0021125"),
-                            @ExampleObject(name = "Not found", ref = "#/components/examples/empty-result-set"),
-                    }))
-    })
     public @ResponseBody
     List<CancerSummaryDto> cancerSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 
