@@ -4,10 +4,18 @@ import gov.epa.ccte.api.hazard.domain.Ecotox;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "ecotox", path = "ecotox", exported = false)
+@SuppressWarnings("unused")
+@RepositoryRestResource(exported = false)
 public interface EcotoxRepository extends JpaRepository<Ecotox, Integer> {
-    List<Ecotox> findAllByDtxsid(@Param("dtxsid") String dtxsid);
+    @Transactional(readOnly = true)
+    <T>
+    List<T> findAllByDtxsid(@Param("dtxsid") String dtxsid, Class<T> type);
+
+    <T> List<T> findByDtxsidInOrderByDtxsidAsc(String[] dtxsids, Class<T> type);
+
+
 }
