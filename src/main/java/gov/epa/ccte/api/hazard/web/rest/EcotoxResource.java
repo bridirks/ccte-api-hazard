@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.Ecotox;
+import gov.epa.ccte.api.hazard.projection.EcotoxAll;
 import gov.epa.ccte.api.hazard.repository.EcotoxRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,14 +44,14 @@ public class EcotoxResource {
     @GetMapping(value = "/ecotox/search/by-dtxsid/{dtxsid}")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Ecotox.class})))
+                    schema=@Schema(oneOf = {EcotoxAll.class})))
     })
     public @ResponseBody
-    List<Ecotox> ecotoxdByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
+    List<EcotoxAll> ecotoxdByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all ecotox for dtxsid = {}", dtxsid);
 
-        List<Ecotox> data = repository.findAllByDtxsid(dtxsid, Ecotox.class);
+        List<EcotoxAll> data = repository.findAllByDtxsid(dtxsid, EcotoxAll.class);
 
         return data;
     }
@@ -64,18 +64,18 @@ public class EcotoxResource {
     @Operation(summary = "Get ecotox data by batch of dtxsid(s)")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Ecotox.class})))
+                    schema=@Schema(oneOf = {EcotoxAll.class})))
     })
     @PostMapping(value = "/ecotox/search/by-dtxsid/")
     public @ResponseBody
-    List<Ecotox> ecotoxdBBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<EcotoxAll> ecotoxdBBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                            @RequestBody String[] dtxsids) {
 
         log.debug("all cancer summary for dtxsid size = {}", dtxsids.length);
 
-        List<Ecotox> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, Ecotox.class);
+        List<EcotoxAll> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, EcotoxAll.class);
 
         return data;
     }

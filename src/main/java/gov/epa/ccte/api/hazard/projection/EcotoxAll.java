@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * A Projection for the {@link gov.epa.ccte.api.hazard.domain.Ecotox} entity
  */
-public interface Ecotox {
+public interface EcotoxAll {
     Integer getId();
 
     String getDtxsid();

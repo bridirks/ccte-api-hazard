@@ -3,7 +3,7 @@ package gov.epa.ccte.api.hazard.projection;
 /**
  * A Projection for the {@link gov.epa.ccte.api.hazard.domain.Hazard} entity
  */
-public interface Hazard {
+public interface HazardAll {
     Integer getId();
 
     String getDtxsid();

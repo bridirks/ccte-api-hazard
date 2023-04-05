@@ -3,7 +3,7 @@ package gov.epa.ccte.api.hazard.projection;
 /**
  * A Projection for the {@link gov.epa.ccte.api.hazard.domain.SkinEye} entity
  */
-public interface SkinEye {
+public interface SkinEyeAll {
     Integer getId();
 
     String getClassification();

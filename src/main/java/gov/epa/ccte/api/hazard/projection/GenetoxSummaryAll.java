@@ -3,7 +3,7 @@ package gov.epa.ccte.api.hazard.projection;
 /**
  * A Projection for the {@link gov.epa.ccte.api.hazard.domain.GenetoxSummary} entity
  */
-public interface GenetoxSummary {
+public interface GenetoxSummaryAll {
     Integer getId();
 
     String getDtxsid();

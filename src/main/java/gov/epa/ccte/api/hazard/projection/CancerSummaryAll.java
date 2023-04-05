@@ -3,7 +3,7 @@ package gov.epa.ccte.api.hazard.projection;
 /**
  * A Projection for the {@link gov.epa.ccte.api.hazard.domain.CancerSummary} entity
  */
-public interface CancerSummary {
+public interface CancerSummaryAll {
     Integer getId();
 
     String getCancerCall();

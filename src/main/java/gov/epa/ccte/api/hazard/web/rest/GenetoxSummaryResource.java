@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.GenetoxSummary;
+import gov.epa.ccte.api.hazard.projection.GenetoxSummaryAll;
 import gov.epa.ccte.api.hazard.repository.GenetoxSummaryRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -45,15 +45,15 @@ public class GenetoxSummaryResource {
     @Operation(summary = "Get genetox summary data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {GenetoxSummary.class})))
+                    schema=@Schema(oneOf = {GenetoxSummaryAll.class})))
     })
     @GetMapping(value = "hazard/genetox-summary/search/by-dtxsid/{dtxsid}")
     public @ResponseBody
-    List<GenetoxSummary> genetoxSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
+    List<GenetoxSummaryAll> genetoxSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all cancer summary for dtxsid = {}", dtxsid);
 
-        List<GenetoxSummary> data = repository.findByDtxsid(dtxsid, GenetoxSummary.class);
+        List<GenetoxSummaryAll> data = repository.findByDtxsid(dtxsid, GenetoxSummaryAll.class);
 
         return data;
     }
@@ -67,18 +67,18 @@ public class GenetoxSummaryResource {
     @Operation(summary = "Get Genetox Summary data by batch of dtxsid(s).")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {GenetoxSummary.class})))
+                    schema=@Schema(oneOf = {GenetoxSummaryAll.class})))
     })
     @PostMapping(value = "hazard/genetox-summary/search/by-dtxsid/")
     public @ResponseBody
-    List<GenetoxSummary>batchSearch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<GenetoxSummaryAll>batchSearch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                    @RequestBody String[] dtxsids) {
 
         log.debug("all cancer summary for dtxsid size = {}", dtxsids.length);
 
-        List<GenetoxSummary> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxSummary.class);
+        List<GenetoxSummaryAll> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxSummaryAll.class);
 
         return data;
     }

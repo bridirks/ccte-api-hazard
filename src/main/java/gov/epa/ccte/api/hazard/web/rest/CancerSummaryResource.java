@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.CancerSummary;
+import gov.epa.ccte.api.hazard.projection.CancerSummaryAll;
 import gov.epa.ccte.api.hazard.repository.CancerSummaryRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -47,14 +47,14 @@ public class CancerSummaryResource {
     @GetMapping(value = "hazard/cancer-summary/search/by-dtxsid/{dtxsid}")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {CancerSummary.class})))
+                    schema=@Schema(oneOf = {CancerSummaryAll.class})))
     })
     public @ResponseBody
-    List<CancerSummary> cancerSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
+    List<CancerSummaryAll> cancerSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all cancer summary for dtxsid = {}", dtxsid);
 
-        List<CancerSummary> data = repository.findAllByDtxsid(dtxsid, CancerSummary.class);
+        List<CancerSummaryAll> data = repository.findAllByDtxsid(dtxsid, CancerSummaryAll.class);
 
         return data;
     }
@@ -68,18 +68,18 @@ public class CancerSummaryResource {
     @Operation(summary = "Get cancer summary data by batch of dtxsid(s)")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {CancerSummary.class})))
+                    schema=@Schema(oneOf = {CancerSummaryAll.class})))
     })
     @PostMapping(value = "hazard/cancer-summary/search/by-dtxsid/")
     public @ResponseBody
-    List<CancerSummary> cancerSummaryBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<CancerSummaryAll> cancerSummaryBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                                @RequestBody String[] dtxsids) {
 
         log.debug("all cancer summary for dtxsid size = {}", dtxsids.length);
 
-        List<CancerSummary> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, CancerSummary.class);
+        List<CancerSummaryAll> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, CancerSummaryAll.class);
 
         return data;
     }

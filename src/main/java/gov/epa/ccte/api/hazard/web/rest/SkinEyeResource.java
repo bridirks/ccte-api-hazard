@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.SkinEye;
+import gov.epa.ccte.api.hazard.projection.SkinEyeAll;
 import gov.epa.ccte.api.hazard.repository.SkinEyeRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,15 +44,15 @@ public class SkinEyeResource {
     @Operation(summary = "Get skin eye data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {SkinEye.class})))
+                    schema=@Schema(oneOf = {SkinEyeAll.class})))
     })
     @GetMapping(value = "/hazard/skin-eye/search/by-dtxsid/{dtxsid}")
     public @ResponseBody
-    List<SkinEye> skinEyedByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
+    List<SkinEyeAll> skinEyedByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("all skin eye for dtxsid = {}", dtxsid);
 
-        List<SkinEye> data = repository.findAllByDtxsid(dtxsid, SkinEye.class);
+        List<SkinEyeAll> data = repository.findAllByDtxsid(dtxsid, SkinEyeAll.class);
 
         return data;
     }
@@ -66,18 +66,18 @@ public class SkinEyeResource {
     @Operation(summary = "Get skin eye data by batch of dtxsid(s)")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {SkinEye.class})))
+                    schema=@Schema(oneOf = {SkinEyeAll.class})))
     })
     @PostMapping(value = "/hazard/skin-eye/search/by-dtxsid/")
     public @ResponseBody
-    List<SkinEye> skinEyedBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<SkinEyeAll> skinEyedBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                 @RequestBody String[] dtxsids) {
 
         log.debug("all skin eye for dtxsid size = {}", dtxsids.length);
 
-        List<SkinEye> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, SkinEye.class);
+        List<SkinEyeAll> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, SkinEyeAll.class);
 
         return data;
     }

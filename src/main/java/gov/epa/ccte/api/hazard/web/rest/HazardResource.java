@@ -1,7 +1,7 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
 
-import gov.epa.ccte.api.hazard.projection.Hazard;
+import gov.epa.ccte.api.hazard.projection.HazardAll;
 import gov.epa.ccte.api.hazard.repository.HazardRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,16 +44,16 @@ public class HazardResource {
     @Operation(summary = "Get hazard (both human and eco) data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Hazard.class})))
+                    schema=@Schema(oneOf = {HazardAll.class})))
     })
     @RequestMapping(value = "hazard/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
     public @ResponseBody
-    List<Hazard> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
+    List<HazardAll> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                    @PathVariable("dtxsid") String dtxsid)  {
 
         log.debug("all hazard for dtxsid = {}", dtxsid);
 
-        List<Hazard> data = repository.findAllByDtxsid(new String[]{dtxsid}, Hazard.class);
+        List<HazardAll> data = repository.findAllByDtxsid(new String[]{dtxsid}, HazardAll.class);
 
         return data;
     }
@@ -67,18 +67,18 @@ public class HazardResource {
     @Operation(summary = "Get hazard (human and eco) data by batch of dtxsid(s).")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Hazard.class})))
+                    schema=@Schema(oneOf = {HazardAll.class})))
     })
     @RequestMapping(value = "hazard/search/by-dtxsid/", method = RequestMethod.POST)
     public @ResponseBody
-    List<Hazard> hazardBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<HazardAll> hazardBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                              @RequestBody String[] dtxsids) {
 
         log.debug("all hazard for dtxsid size = {}", dtxsids.length);
 
-        List<Hazard> data = repository.findAllByDtxsid(dtxsids, Hazard.class);
+        List<HazardAll> data = repository.findAllByDtxsid(dtxsids, HazardAll.class);
 
         return data;
     }
@@ -92,16 +92,16 @@ public class HazardResource {
     @Operation(summary = "Get hazard human data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Hazard.class})))
+                    schema=@Schema(oneOf = {HazardAll.class})))
     })
     @RequestMapping(value = "hazard/human/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
     public @ResponseBody
-    List<Hazard> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
+    List<HazardAll> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                         @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("human hazard for dtxsid = {}", dtxsid);
 
-        List<Hazard> data = repository.findHumanDataByDtxsid(new String[]{dtxsid}, Hazard.class);
+        List<HazardAll> data = repository.findHumanDataByDtxsid(new String[]{dtxsid}, HazardAll.class);
 
         return data;
     }
@@ -115,18 +115,18 @@ public class HazardResource {
     @Operation(summary = "Get hazard human data by batch of dtxsid(s)")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Hazard.class})))
+                    schema=@Schema(oneOf = {HazardAll.class})))
     })
     @RequestMapping(value = "hazard/human/search/by-dtxsid/", method = RequestMethod.POST)
     public @ResponseBody
-    List<Hazard> humanBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<HazardAll> humanBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                      @RequestBody String[] dtxsids) {
 
         log.debug("human hazard for dtxsid size = {}", dtxsids.length);
 
-        List<Hazard> data = repository.findHumanDataByDtxsid(dtxsids, Hazard.class);
+        List<HazardAll> data = repository.findHumanDataByDtxsid(dtxsids, HazardAll.class);
 
         return data;
     }
@@ -140,17 +140,17 @@ public class HazardResource {
     @Operation(summary = "Get hazard eco data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Hazard.class})))
+                    schema=@Schema(oneOf = {HazardAll.class})))
     })
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
     public @ResponseBody
-    List<Hazard> ecoHazardByDtxsid(
+    List<HazardAll> ecoHazardByDtxsid(
             @Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                       @PathVariable("dtxsid") String dtxsid) {
 
         log.debug("eco hazard for dtxsid = {}", dtxsid);
 
-        List<Hazard> data = repository.findEcoDataByDtxsid(new String[]{dtxsid}, Hazard.class);
+        List<HazardAll> data = repository.findEcoDataByDtxsid(new String[]{dtxsid}, HazardAll.class);
 
         return data;
     }
@@ -164,18 +164,18 @@ public class HazardResource {
     @Operation(summary = "Get Hazard eco data by batch of dtxsid(s)")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {Hazard.class})))
+                    schema=@Schema(oneOf = {HazardAll.class})))
     })
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/", method = RequestMethod.POST)
     public @ResponseBody
-    List<Hazard> ecoBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<HazardAll> ecoBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                           @RequestBody String[] dtxsids){
 
         log.debug("eco hazard for dtxsid size = {}", dtxsids.length);
 
-        List<Hazard> data = repository.findEcoDataByDtxsid(dtxsids, Hazard.class);
+        List<HazardAll> data = repository.findEcoDataByDtxsid(dtxsids, HazardAll.class);
 
         return data;
     }
