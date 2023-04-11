@@ -6,15 +6,14 @@ package gov.epa.ccte.api.hazard.projection;
 public interface CancerSummaryAll {
     Integer getId();
 
-    String getCancerCall();
-
     String getDtxsid();
-
-    String getExposureRoute();
-
-    Long getRn();
 
     String getSource();
 
     String getUrl();
+
+    String getExposureRoute();
+
+    String getCancerCall();
+
 }

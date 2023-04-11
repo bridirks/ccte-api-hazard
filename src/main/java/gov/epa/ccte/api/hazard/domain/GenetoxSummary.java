@@ -26,10 +26,10 @@ public class GenetoxSummary {
     private String dtxsid;
 
     @Column(name = "reports_pos")
-    private Integer reportsPos;
+    private Integer reportsPositive;
 
     @Column(name = "reports_neg")
-    private Integer reportsNeg;
+    private Integer reportsNegative;
 
     @Column(name = "reports_other")
     private Integer reportsOther;

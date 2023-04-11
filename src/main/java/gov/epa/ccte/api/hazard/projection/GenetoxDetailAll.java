@@ -23,6 +23,4 @@ public interface GenetoxDetailAll {
     String getAssayResult();
 
     Integer getYear();
-
-    Long getRn();
 }

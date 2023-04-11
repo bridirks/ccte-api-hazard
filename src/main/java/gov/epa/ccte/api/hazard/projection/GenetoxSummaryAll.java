@@ -8,9 +8,9 @@ public interface GenetoxSummaryAll {
 
     String getDtxsid();
 
-    Integer getReportsPos();
+    Integer getReportsPositive();
 
-    Integer getReportsNeg();
+    Integer getReportsNegative();
 
     Integer getReportsOther();
 
@@ -18,5 +18,4 @@ public interface GenetoxSummaryAll {
 
     String getMicronucleus();
 
-    Long getRn();
 }
