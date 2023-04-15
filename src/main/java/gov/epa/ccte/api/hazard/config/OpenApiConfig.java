@@ -22,10 +22,8 @@ import org.springframework.context.annotation.Configuration;
                         email = ""),
                 version = "1.0.0"
         ),
-        servers = { @Server(url = "https://api-ccte.epa.gov", description = "Production Environment"),
-                @Server(url = "https://api-ccte-stg.epa.gov", description = "Staging Environment")
-        }
-        )
+        servers = { @Server(url = "${application.api-url}", description = "${application.api-env}")}
+)
 @SecurityScheme(
         type = SecuritySchemeType.APIKEY,
         name = "api_key",
