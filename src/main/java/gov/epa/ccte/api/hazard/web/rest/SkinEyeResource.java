@@ -2,6 +2,7 @@ package gov.epa.ccte.api.hazard.web.rest;
 
 import gov.epa.ccte.api.hazard.projection.SkinEyeAll;
 import gov.epa.ccte.api.hazard.repository.SkinEyeRepository;
+import gov.epa.ccte.api.hazard.web.rest.error.RequestWithHigherNumberOfDtxsidProblem;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -41,7 +42,7 @@ public class SkinEyeResource {
      * @param dtxsid the matching dtxsid of the skin eye data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of skin eye}.
      */
-    @Operation(summary = "Get skin eye data by dtxsid")
+    @Operation(summary = "Get data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {SkinEyeAll.class})))
@@ -63,7 +64,7 @@ public class SkinEyeResource {
      * @param dtxsid the matching dtxsid of the skin eye data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of skin eye}.
      */
-    @Operation(summary = "Get skin eye data by batch of dtxsid(s)")
+    @Operation(summary = "Get data by batch of dtxsid(s)")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {SkinEyeAll.class})))
@@ -76,6 +77,9 @@ public class SkinEyeResource {
                                 @RequestBody String[] dtxsids) {
 
         log.debug("all skin eye for dtxsid size = {}", dtxsids.length);
+
+        if(dtxsids.length > 200)
+            throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
 
         List<SkinEyeAll> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, SkinEyeAll.class);
 

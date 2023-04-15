@@ -3,6 +3,7 @@ package gov.epa.ccte.api.hazard.web.rest;
 
 import gov.epa.ccte.api.hazard.projection.HazardAll;
 import gov.epa.ccte.api.hazard.repository.HazardRepository;
+import gov.epa.ccte.api.hazard.web.rest.error.RequestWithHigherNumberOfDtxsidProblem;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -41,7 +42,7 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get hazard (both human and eco) data by dtxsid")
+    @Operation(summary = "Get all data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {HazardAll.class})))
@@ -64,7 +65,7 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get hazard (human and eco) data by batch of dtxsid(s).")
+    @Operation(summary = "Get all data by batch of dtxsid(s).", description = "Note: Maximum 200 DTXSIDs per request")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {HazardAll.class})))
@@ -78,6 +79,9 @@ public class HazardResource {
 
         log.debug("all hazard for dtxsid size = {}", dtxsids.length);
 
+        if(dtxsids.length > 200)
+            throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
+
         List<HazardAll> data = repository.findAllByDtxsid(dtxsids, HazardAll.class);
 
         return data;
@@ -89,7 +93,7 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get hazard human data by dtxsid")
+    @Operation(summary = "Get human data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {HazardAll.class})))
@@ -112,7 +116,7 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get hazard human data by batch of dtxsid(s)")
+    @Operation(summary = "Get human data by batch of dtxsid(s)", description = "Note: Maximum 200 DTXSIDs per request")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {HazardAll.class})))
@@ -137,7 +141,7 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get hazard eco data by dtxsid")
+    @Operation(summary = "Get eco data by dtxsid")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {HazardAll.class})))
@@ -161,7 +165,7 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get Hazard eco data by batch of dtxsid(s)")
+    @Operation(summary = "Get eco data by batch of dtxsid(s)", description = "Note: Maximum 200 DTXSIDs per request")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
                     schema=@Schema(oneOf = {HazardAll.class})))
@@ -174,6 +178,9 @@ public class HazardResource {
                           @RequestBody String[] dtxsids){
 
         log.debug("eco hazard for dtxsid size = {}", dtxsids.length);
+
+        if(dtxsids.length > 200)
+            throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
 
         List<HazardAll> data = repository.findEcoDataByDtxsid(dtxsids, HazardAll.class);
 
