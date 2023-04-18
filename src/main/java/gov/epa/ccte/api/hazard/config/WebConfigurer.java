@@ -7,15 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.DefaultCorsProcessor;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Collections;
 
 
@@ -56,17 +52,17 @@ public class WebConfigurer implements ServletContextInitializer {
         //config.setMaxAge(3600);
         source.registerCorsConfiguration("/**", config);
         CorsFilter filter = new CorsFilter(source);
-        filter.setCorsProcessor(new DefaultCorsProcessor() {
-            @Override
-            public boolean processRequest(CorsConfiguration config, HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                if ("OPTIONS".equals(request.getMethod()) && "/hazard/**".equals(request.getRequestURI())) {
-                    // Exclude the API endpoint from preflight checks
-                    return true;
-                }
-                return super.processRequest(config, request, response);
-            }
-        });
+//        filter.setCorsProcessor(new DefaultCorsProcessor() {
+//            @Override
+//            public boolean processRequest(CorsConfiguration config, HttpServletRequest request, HttpServletResponse response)
+//                    throws IOException {
+//                if ("OPTIONS".equals(request.getMethod()) && "/hazard/**".equals(request.getRequestURI())) {
+//                    // Exclude the API endpoint from preflight checks
+//                    return true;
+//                }
+//                return super.processRequest(config, request, response);
+//            }
+//        });
         return filter;
     }
 }

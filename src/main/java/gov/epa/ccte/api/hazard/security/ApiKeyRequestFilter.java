@@ -52,6 +52,9 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
+        log.info("*** checking the API key ***");
+
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String path = req.getRequestURI();
 
@@ -61,25 +64,30 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
 //        }
 
         // get from header
+        String method = req.getMethod();
+        if(!method.equalsIgnoreCase("options")) {
+            //String headers = String.valueOf(req.getHeaderNames());
+            String key = getApiKeyfromHttpHeader(req.getHeader(keyName));
 
-        String key = getApiKeyfromHttpHeader(req.getHeader(keyName));
+            // In case user is provided api key through parameter x-api-key
+            if (key == null || key.equals("")) {
+                // get key from the URL parameter
+                key = getApiKeyFromQueryParam(req.getQueryString());
+            }
 
-        // In case user is provided api key through parameter x-api-key
-        if(key == null || key.equals("")){
-            // get key from the URL parameter
-            key = getApiKeyFromQueryParam(req.getQueryString());
-        }
-
-        if(key == null || key.equals("")){
-            // api key is missing
-            returnErrorMsg(servletResponse, key);
-        } else if(isKeyExist(key)){
-            // api key found
-            filterChain.doFilter(servletRequest, servletResponse);
+            if (key == null || key.equals("")) {
+                // api key is missing
+                returnErrorMsg(servletResponse, key);
+            } else if (isKeyExist(key)) {
+                // api key found
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else {
+                // api doesn't match
+                returnErrorMsg(servletResponse, key);
+                log.info("*** API key {} not recognized *** ", key);
+            }
         }else{
-            // api doesn't match
-            returnErrorMsg(servletResponse, key);
-            log.info("*** API key {} not recognized *** ", key);
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
