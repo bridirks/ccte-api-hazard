@@ -15,8 +15,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.zalando.problem.Problem;
 
 import java.util.List;
 
@@ -31,6 +33,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class HazardResource {
     final private HazardRepository repository;
+    @Value("${application.batch-size}")
+    private Integer batchSize;
 
     public HazardResource(HazardRepository repository) {
         this.repository = repository;
@@ -65,10 +69,14 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get all data by batch of dtxsid(s).", description = "Note: Maximum 200 DTXSIDs per request")
+    @Operation(summary = "Get all data by batch of dtxsid(s).", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {HazardAll.class})))
+                    schema=@Schema(oneOf = {HazardAll.class}))),
+            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+                    content = @Content( mediaType = "application/json",
+                    examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                    schema=@Schema(oneOf = {Problem.class})))
     })
     @RequestMapping(value = "hazard/search/by-dtxsid/", method = RequestMethod.POST)
     public @ResponseBody
@@ -79,7 +87,7 @@ public class HazardResource {
 
         log.debug("all hazard for dtxsid size = {}", dtxsids.length);
 
-        if(dtxsids.length > 200)
+        if(dtxsids.length > batchSize)
             throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
 
         List<HazardAll> data = repository.findAllByDtxsid(dtxsids, HazardAll.class);
@@ -116,10 +124,14 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get human data by batch of dtxsid(s)", description = "Note: Maximum 200 DTXSIDs per request")
+    @Operation(summary = "Get human data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {HazardAll.class})))
+                    schema=@Schema(oneOf = {HazardAll.class}))),
+            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+                    content = @Content( mediaType = "application/json",
+                    examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                    schema=@Schema(oneOf = {Problem.class})))
     })
     @RequestMapping(value = "hazard/human/search/by-dtxsid/", method = RequestMethod.POST)
     public @ResponseBody
@@ -129,6 +141,9 @@ public class HazardResource {
                                      @RequestBody String[] dtxsids) {
 
         log.debug("human hazard for dtxsid size = {}", dtxsids.length);
+
+        if(dtxsids.length > batchSize)
+            throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
 
         List<HazardAll> data = repository.findHumanDataByDtxsid(dtxsids, HazardAll.class);
 
@@ -165,10 +180,14 @@ public class HazardResource {
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
-    @Operation(summary = "Get eco data by batch of dtxsid(s)", description = "Note: Maximum 200 DTXSIDs per request")
+    @Operation(summary = "Get eco data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value= {
             @ApiResponse(responseCode = "200", description = "OK",  content = @Content( mediaType = "application/json",
-                    schema=@Schema(oneOf = {HazardAll.class})))
+                    schema=@Schema(oneOf = {HazardAll.class}))),
+            @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
+                    content = @Content( mediaType = "application/json",
+                    examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
+                    schema=@Schema(oneOf = {Problem.class})))
     })
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/", method = RequestMethod.POST)
     public @ResponseBody
@@ -179,7 +198,7 @@ public class HazardResource {
 
         log.debug("eco hazard for dtxsid size = {}", dtxsids.length);
 
-        if(dtxsids.length > 200)
+        if(dtxsids.length > batchSize)
             throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
 
         List<HazardAll> data = repository.findEcoDataByDtxsid(dtxsids, HazardAll.class);
