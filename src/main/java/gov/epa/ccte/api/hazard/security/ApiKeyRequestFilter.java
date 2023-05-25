@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ApiKeyRequestFilter extends GenericFilterBean {
 
     private ConcurrentHashMap<UUID, String> keyStore;// = new ConcurrentHashMap();
-
+    private ConcurrentHashMap<String, String> approvedOriginStore;// = new ConcurrentHashMap();
     private final ObjectMapper mapper = new ObjectMapper();
     private final String keyName;
 
@@ -37,6 +37,18 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
         this.keyName = keyName;
 
         initializeKeyStore(repository);
+        initializeApprovedOriginStore();
+    }
+
+    private void initializeApprovedOriginStore() {
+        approvedOriginStore = new ConcurrentHashMap<>();
+        approvedOriginStore.put("http://localhost:3003", "http://localhost:3003");
+        approvedOriginStore.put("http://localhost:8888", "http://localhost:8888");
+        approvedOriginStore.put("https://ccte-ccd-dev.epa.gov", "https://ccte-ccd-dev.epa.gov");
+        approvedOriginStore.put("https://ccte-ccd-stg.epa.gov", "https://ccte-ccd-stg.epa.gov");
+        approvedOriginStore.put("https://ccte-ccd-prod.epa.gov", "https://ccte-ccd-prod.epa.gov");
+        approvedOriginStore.put("https://comptox.epa.gov", "https://comptox.epa.gov");
+        approvedOriginStore.put("https://ccte-api-s.app.cloud.gov", "https://ccte-api-s.app.cloud.gov");
     }
 
     private void initializeKeyStore(ApiKeyRepository repository) {
@@ -55,17 +67,27 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
 
         log.info("*** checking the API key ***");
 
+        // dump the request headers
+        log.info("*** request headers ***");
+//        Enumeration<String> headerNames = ((HttpServletRequest) servletRequest).getHeaderNames();
+//
+//        if (headerNames != null) {
+//            while (headerNames.hasMoreElements()) {
+//                String header = headerNames.nextElement();
+//                log.info("Header: {} = {}", header, ((HttpServletRequest) servletRequest).getHeader(header));
+//            }
+//        }
+
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        String path = req.getRequestURI();
 
 //        if(path.startsWith("/api") == false){
 //            filterChain.doFilter(servletRequest, servletResponse);
 //            return;
 //        }
 
-        // get from header
-        String method = req.getMethod();
-        if(!method.equalsIgnoreCase("options")) {
+        //
+        if(shouldCheckApiKey(req)) {
+            log.info("*** API key check is checking ***");
             //String headers = String.valueOf(req.getHeaderNames());
             String key = getApiKeyfromHttpHeader(req.getHeader(keyName));
 
@@ -87,9 +109,43 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
                 log.info("*** API key {} not recognized *** ", key);
             }
         }else{
+            log.info("*** API key check is skipped ***");
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
+
+    private boolean shouldCheckApiKey(HttpServletRequest req) {
+        // check if request has method OPTIONS or remote is localhost
+        String method = req.getMethod();    // OPTIONS
+        String origin = Optional.ofNullable(req.getHeader("origin")).orElse("");  // example - origin = http://localhost:8888
+        String referer = Optional.ofNullable(req.getHeader("Referer")).orElse("");  // example - referer = http://localhost:8888/dashboard
+        String path = Optional.ofNullable(req.getServletPath()).orElse(""); // example - path = /chemical/file/image/search/by-dtxsid/DTXSID7020182
+
+        String refererdHost;
+        if(!referer.equals("")){
+            refererdHost = "https://" + referer.split("/")[2];  // example - referredHost = localhost:8888
+        }else{
+            refererdHost = ""; //"https://" + req.getHeader("Referer").split("/")[2];  // example - referredHost = localhost:8888
+        }
+
+        log.debug("origin = {}, referer ={}, refererdHost = {}, path={} ",origin, referer, refererdHost, path);
+
+        // if chemical/file path - allow access to images without any api key
+        if(path.contains("/chemical/file/")){
+            return false;
+        }
+
+        if(method.equalsIgnoreCase("OPTIONS") || approvedOrigin(origin) || approvedOrigin(refererdHost))
+            return false;
+        else
+            return true;
+    }
+
+    private boolean approvedOrigin(String origin) {
+
+        return origin != null && approvedOriginStore.containsKey(origin);
+    }
+
 
     private String getApiKeyFromQueryParam(String query) throws UnsupportedEncodingException {
 
@@ -121,7 +177,6 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
 
     private void returnErrorMsg(ServletResponse servletResponse, String key) throws IOException {
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-        String error = "Invalid API KEY";
 
         AuthorizationProblem problem;
 
