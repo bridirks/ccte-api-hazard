@@ -2,14 +2,17 @@ package gov.epa.ccte.api.hazard.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.type.SqlTypes;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 
@@ -103,7 +106,7 @@ public class Ecotox {
     private String chemicalPurity;
 
     @Column(name = "conc1_author")
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(SqlTypes.LONGVARCHAR)
     private String conc1Author;
 
     @Size(max = 1000)
@@ -143,7 +146,7 @@ public class Ecotox {
     private String exposureType;
 
     @Column(name = "habitat")
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(SqlTypes.LONGVARCHAR)
     private String habitat;
 
     @Size(max = 240)
@@ -155,7 +158,7 @@ public class Ecotox {
     private String numberDoses;
 
     @Column(name = "observed_duration_std")
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(SqlTypes.LONGVARCHAR)
     private String observedDurationStd;
 
     @Size(max = 4000)
@@ -202,7 +205,7 @@ public class Ecotox {
     private String speciesScientificName;
 
     @Column(name = "summary_additional_parameters")
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(SqlTypes.LONGVARCHAR)
     private String summaryAdditionalParameters;
 
     @Size(max = 1000)
@@ -214,11 +217,11 @@ public class Ecotox {
     private String title;
 
     @Column(name = "exposure_group")
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(SqlTypes.LONGVARCHAR)
     private String exposureGroup;
 
     @Column(name = "effect_group_level")
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(SqlTypes.LONGVARCHAR)
     private String effectGroupLevel;
 
     @Size(max = 4000)

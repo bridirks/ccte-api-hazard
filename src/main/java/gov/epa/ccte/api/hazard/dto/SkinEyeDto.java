@@ -2,8 +2,8 @@ package gov.epa.ccte.api.hazard.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 /**
  * A DTO for the {@link gov.epa.ccte.api.hazard.domain.SkinEye} entity

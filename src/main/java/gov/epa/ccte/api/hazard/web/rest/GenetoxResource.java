@@ -4,7 +4,7 @@ import gov.epa.ccte.api.hazard.projection.GenetoxDetailAll;
 import gov.epa.ccte.api.hazard.projection.GenetoxSummaryAll;
 import gov.epa.ccte.api.hazard.repository.GenetoxDetailRepository;
 import gov.epa.ccte.api.hazard.repository.GenetoxSummaryRepository;
-import gov.epa.ccte.api.hazard.web.rest.error.RequestWithHigherNumberOfDtxsidProblem;
+import gov.epa.ccte.api.hazard.web.rest.error.HigherNumberOfDtxsidException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -17,9 +17,9 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.zalando.problem.Problem;
 
 import java.util.List;
 
@@ -82,7 +82,7 @@ public class GenetoxResource {
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content( mediaType = "application/json",
                     examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
-                    schema=@Schema(oneOf = {Problem.class})))
+                    schema=@Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping(value = "hazard/genetox/summary/search/by-dtxsid/")
     public @ResponseBody
@@ -94,7 +94,7 @@ public class GenetoxResource {
         log.debug("all cancer summary for dtxsid size = {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
-            throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
+            throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
         List<GenetoxSummaryAll> data = summaryRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxSummaryAll.class);
 
@@ -141,7 +141,7 @@ public class GenetoxResource {
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content( mediaType = "application/json",
                     examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
-                    schema=@Schema(oneOf = {Problem.class})))
+                    schema=@Schema(oneOf = {ProblemDetail.class})))
     })
     @PostMapping(value = "hazard/genetox/details/search/by-dtxsid/")
     public @ResponseBody
@@ -153,7 +153,7 @@ public class GenetoxResource {
         log.debug("all cancer summary for dtxsid size= {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
-            throw new RequestWithHigherNumberOfDtxsidProblem(dtxsids.length);
+            throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
         List<GenetoxDetailAll> data = detailRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxDetailAll.class);
 
