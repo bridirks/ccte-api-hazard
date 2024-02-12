@@ -8,13 +8,11 @@ jobs:
   security-scan:
     runs-on: ubuntu-latest
     steps:
-     #- name: make a directory
-     #  run: mkdir -p $GITHUB_WORKSPACE/passive
      - name: perform passive scan
        uses: zaproxy/action-api-scan@v0.6.0
        with:
          token: ${{ secrets.GITHUB_TOKEN }}
          format: openapi
          target: 'https://api-ccte-stg.epa.gov/docs/hazard.json'
-         #cmd_options: '-r /zap/wrk/passive'
-         #cmd_options: '-config "passive.mode.out.dir=$GITHUB_WORKSPACE/passive"'
+         #cmd_options: '-a'
+         
