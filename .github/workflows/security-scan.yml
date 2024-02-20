@@ -8,13 +8,15 @@ jobs:
   security-scan:
     runs-on: ubuntu-latest
     steps:
+     - name: Set up environment 
+       run: |
+        echo "x-api-key=${{ secrets.X_API_KEY }}" >> $GITHUB_ENV
      - name: perform passive scan
        uses: zaproxy/action-api-scan@v0.6.0
        with:
          token: ${{ secrets.GITHUB_TOKEN }}
          format: openapi
          target: 'https://api-ccte-stg.epa.gov/docs/hazard.json'
-         api-key: ${{ secrets.X_API_KEY }}
         #include the alpha passive scan rules as well
          cmd_options: '-a'
          
