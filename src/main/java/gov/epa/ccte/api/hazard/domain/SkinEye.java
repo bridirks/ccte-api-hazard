@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-@Table(name = "skin_eye")
+@Table(name = "skin_eye", schema = "ms")
 public class SkinEye {
     @Id
     @NotNull

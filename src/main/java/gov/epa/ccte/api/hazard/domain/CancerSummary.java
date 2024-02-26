@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-@Table(name = "cancer_summary")
+@Table(name = "cancer_summary", schema = "ms")
 public class CancerSummary {
     @Id
     @NotNull
