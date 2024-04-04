@@ -44,6 +44,8 @@ public class ApiSecurityConfiguration {
         log.debug("*** start filling approvedOriginStore ***");
 
         ConcurrentHashMap<String, String> approvedOriginStore = new ConcurrentHashMap<>();
+        approvedOriginStore.put("https://localhost:3003", "https://localhost:3003");
+        approvedOriginStore.put("https://localhost:8888", "https://localhost:8888");
         approvedOriginStore.put("http://localhost:3003", "http://localhost:3003");
         approvedOriginStore.put("http://localhost:8888", "http://localhost:8888");
         approvedOriginStore.put("https://ccte-ccd-dev.epa.gov", "https://ccte-ccd-dev.epa.gov");
@@ -51,6 +53,8 @@ public class ApiSecurityConfiguration {
         approvedOriginStore.put("https://ccte-ccd-prod.epa.gov", "https://ccte-ccd-prod.epa.gov");
         approvedOriginStore.put("https://comptox.epa.gov", "https://comptox.epa.gov");
         approvedOriginStore.put("https://ccte-api-s.app.cloud.gov", "https://ccte-api-s.app.cloud.gov");
+        approvedOriginStore.put("https://v2626umcth886.rtord.epa.gov:8888", "https://v2626umcth886.rtord.epa.gov:8888");
+        approvedOriginStore.put("https://comptoxstaging.rtpnc.epa.gov", "https://comptoxstaging.rtpnc.epa.gov");
 
         log.info("*** {} urls are loaded. *** ", approvedOriginStore.size());
 
