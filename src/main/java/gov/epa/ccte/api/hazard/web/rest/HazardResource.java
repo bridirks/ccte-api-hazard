@@ -148,7 +148,6 @@ public class HazardResource {
 
     /**
      * {@code GET  hazard/search/human/by-dtxsid/{dtxsid} : get list of human hazard data for the "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
