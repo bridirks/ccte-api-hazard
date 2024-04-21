@@ -4,6 +4,7 @@ package gov.epa.ccte.api.hazard.web.rest;
 import gov.epa.ccte.api.hazard.projection.HazardAll;
 import gov.epa.ccte.api.hazard.repository.HazardRepository;
 import gov.epa.ccte.api.hazard.web.rest.error.HigherNumberOfDtxsidException;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,11 +35,35 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class HazardResource {
     final private HazardRepository repository;
+    private final JdbcTemplate jdbcTemplate;
+
     @Value("${application.batch-size}")
     private Integer batchSize;
 
-    public HazardResource(HazardRepository repository) {
+    public HazardResource(HazardRepository repository, JdbcTemplate jdbcTemplate) {
         this.repository = repository;
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Hidden
+    @GetMapping("/hazard/health")
+    public ResponseEntity health(){
+
+        log.info("checking the health");
+
+        if(jdbcTemplate != null){
+            try {
+                jdbcTemplate.execute("SELECT 1 ");
+                log.debug("DB connection established");
+
+                return ResponseEntity.ok().build();
+
+            } catch (Exception ep){
+                return ResponseEntity.notFound().build();
+            }
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
