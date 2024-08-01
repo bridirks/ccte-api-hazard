@@ -74,7 +74,7 @@ create table ms.hazard
     supercategory            varchar(255),
     species_common           varchar(255),
     human_eco_nt             varchar(255),
-    created_by               varchar(50) default "current_user"(),
+    created_by               varchar(50) default current_user,
     created_at               timestamp   default now()
 );
 

@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import gov.epa.ccte.api.hazard.projection.CancerSummaryAll;
+import gov.epa.ccte.api.hazard.projection.GenetoxDetailAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
-class CancerSummaryRepositoryTest {
+class GenetoxDetailRepositoryTest {
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> pgsqldb = new PostgreSQLContainer<>("postgres:13-alpine");
@@ -31,7 +31,7 @@ class CancerSummaryRepositoryTest {
     private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private TestEntityManager entityManager;
-    @Autowired private CancerSummaryRepository repository;
+    @Autowired private GenetoxDetailRepository repository;
 
     @Test
     void connectionEstablished(){
@@ -50,13 +50,13 @@ class CancerSummaryRepositoryTest {
     // Now test data loaded or not
     @Test
     void testDataLoaded() {
-        assertThat(repository.findAll().size()).isEqualTo(11);
+        assertThat(repository.findAll().size()).isEqualTo(16);
     }
 
     @Test
-    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID0020319", CancerSummaryAll.class)).isNotNull(); }
+    void findByDtxsidOrderBySourceAsc() {assertThat(repository.findByDtxsidOrderBySourceAsc("DTXSID00100670", GenetoxDetailAll.class)).isNotNull();}
 
     @Test
-    void findByDtxsidInOrderByDtxsidAsc() { assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID0020319,DTXSID0020076"}, CancerSummaryAll.class)).isNotNull(); }
+    void findByDtxsidInOrderByDtxsidAsc() {assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00100670,DTXSID00178076"}, GenetoxDetailAll.class)).isNotNull();}
 
 }
