@@ -57,4 +57,5 @@ public class GenetoxDetail {
     @Column(name = "rn")
     private Long rn;
 
+
 }
