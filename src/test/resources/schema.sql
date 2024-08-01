@@ -1,36 +1,16 @@
-CREATE TABLE hazard
+-- create schema
+create schema ms;
+
+-- create tables
+create table ms.cancer_summary
 (
-    id                       INT NOT NULL,
-    dtxsid                   VARCHAR(45),
-    priority_id              INT,
-    source                   VARCHAR(255),
-    subsource                VARCHAR(255),
-    source_url               VARCHAR(255),
-    subsource_url            VARCHAR(255),
-    risk_assessment_class    VARCHAR(255),
-    toxval_type              VARCHAR(255),
-    toxval_subtype           VARCHAR(255),
-    toxval_numeric           DOUBLE,
-    toxval_numeric_qualifier VARCHAR(255),
-    toxval_units             VARCHAR(255),
-    study_type               VARCHAR(255),
-    study_duration_class     VARCHAR(255),
-    study_duration_value     DOUBLE,
-    study_duration_units     VARCHAR(255),
-    strain                   VARCHAR(255),
-    sex                      VARCHAR(255),
-    population               VARCHAR(255),
-    exposure_route           VARCHAR(255),
-    exposure_method          VARCHAR(255),
-    exposure_form            VARCHAR(255),
-    media                    VARCHAR(255),
-    lifestage                VARCHAR(255),
-    generation               VARCHAR(255),
-    study_year                   VARCHAR(255),
-    critical_effect          VARCHAR(1024),
-    detail_text              VARCHAR(255),
-    supercategory            VARCHAR(255),
-    species_common           VARCHAR(255),
-    human_eco_nt             VARCHAR(255),
-    CONSTRAINT pk_hazard PRIMARY KEY (id)
+    dtxsid         varchar(255),
+    source         varchar(255),
+    exposure_route varchar(255),
+    cancer_call    varchar(255),
+    url            varchar(255),
+    rn             bigint,
+    id             integer
 );
+
+
