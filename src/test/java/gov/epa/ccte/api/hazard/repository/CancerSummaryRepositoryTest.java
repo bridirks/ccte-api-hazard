@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import gov.epa.ccte.api.hazard.projection.CancerSummaryAll;
 import org.junit.jupiter.api.Test;
