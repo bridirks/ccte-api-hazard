@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import java.util.List;
 @Tag(name = "Genetox Resource",
         description = "API endpoints for collecting Genetox data.")
 @SecurityRequirement(name = "api_key")
+@RequestMapping( value = "hazard/genetox", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface GenetoxResourceApi {
     /**
      * {@code GET  hazard/genetox/summary/search/by-dtxsid/{dtxsid} : get list of genetox summary data for the "dtxsid".
@@ -36,7 +38,7 @@ public interface GenetoxResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {GenetoxSummaryAll.class})))
     })
-    @GetMapping(value = "hazard/genetox/summary/search/by-dtxsid/{dtxsid}")
+    @GetMapping(value = "/summary/search/by-dtxsid/{dtxsid}")
     @ResponseBody
     List<GenetoxSummaryAll> genetoxSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
 
@@ -54,7 +56,7 @@ public interface GenetoxResourceApi {
                             examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
-    @PostMapping(value = "hazard/genetox/summary/search/by-dtxsid/")
+    @PostMapping(value = "/summary/search/by-dtxsid/")
     @ResponseBody
     List<GenetoxSummaryAll> batchSearchSummary(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
@@ -71,7 +73,7 @@ public interface GenetoxResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {GenetoxDetailAll.class})))
     })
-    @GetMapping(value = "hazard/genetox/details/search/by-dtxsid/{dtxsid}")
+    @GetMapping(value = "/details/search/by-dtxsid/{dtxsid}")
     @ResponseBody
     List<GenetoxDetailAll> genetoxDetailsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
 
@@ -89,7 +91,7 @@ public interface GenetoxResourceApi {
                             examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
                             schema = @Schema(oneOf = {ProblemDetail.class})))
     })
-    @PostMapping(value = "hazard/genetox/details/search/by-dtxsid/")
+    @PostMapping(value = "/details/search/by-dtxsid/")
     @ResponseBody
     List<GenetoxDetailAll> batchSearch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
