@@ -33,6 +33,7 @@ public class HazardResource implements HazardResourceApi {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public ResponseEntity health(){
 
