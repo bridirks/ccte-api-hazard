@@ -31,7 +31,6 @@ public interface HazardResourceApi {
 
     /**
      * {@code GET  hazard/search/by-dtxsid/{dtxsid} : get list of hazard data for the "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
@@ -47,7 +46,6 @@ public interface HazardResourceApi {
 
     /**
      * {@code POST  hazard/search/by-dtxsid/ : get list of hazard data for the "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
@@ -69,7 +67,6 @@ public interface HazardResourceApi {
 
     /**
      * {@code GET  hazard/search/human/by-dtxsid/{dtxsid} : get list of human hazard data for the "dtxsid"
-     *
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
@@ -85,7 +82,6 @@ public interface HazardResourceApi {
 
     /**
      * {@code GET  hazard/search/human/by-dtxsid/{dtxsid} : get list of human hazard data for the "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
@@ -107,7 +103,6 @@ public interface HazardResourceApi {
 
     /**
      * {@code GET  hazard/search/eco/by-dtxsid/{dtxsid} : get list of human hazard data for the "dtxsid"
-     *
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
@@ -124,7 +119,6 @@ public interface HazardResourceApi {
 
     /**
      * {@code POST  hazard/search/eco/by-dtxsid/{dtxsid} : get list of human hazard data for batch "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the human hazard data to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the list of hazard}.
      */
