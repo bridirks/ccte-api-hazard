@@ -28,7 +28,6 @@ import java.util.List;
 public interface GenetoxResourceApi {
     /**
      * {@code GET  hazard/genetox/summary/search/by-dtxsid/{dtxsid} : get list of genetox summary data for the "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the genetox summary data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox summary}.
      */
@@ -43,7 +42,6 @@ public interface GenetoxResourceApi {
 
     /**
      * {@code POST  hazard/genetox/summary/search/by-dtxsid/{dtxsid} : get list of genetox summary data for batch "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the genetox summary data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox summary}.
      */
@@ -65,7 +63,6 @@ public interface GenetoxResourceApi {
 
     /**
      * {@code GET  hazard/genetox-details/search/by-dtxsid/{dtxsid} : get list of genetox detail data for the "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the genetox detail data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox detail}.
      */
@@ -80,7 +77,6 @@ public interface GenetoxResourceApi {
 
     /**
      * {@code POST  hazard/genetox-details/search/by-dtxsid/{dtxsid} : get list of genetox detail data for batch "dtxsid".
-     *
      * @param dtxsid the matching dtxsid of the genetox detail data to retrieve.
      * @return the {@link ResponseEntity } with status {@code 200 (OK)} and with body the list of genetox detail}.
      */
