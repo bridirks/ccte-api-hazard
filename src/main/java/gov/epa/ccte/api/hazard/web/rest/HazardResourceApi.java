@@ -25,6 +25,7 @@ import java.util.List;
         description = "API endpoints for collecting hazard data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
 public interface HazardResourceApi {
+    @SuppressWarnings("rawtypes")
     @Hidden
     @GetMapping("/hazard/health")
     ResponseEntity health();
