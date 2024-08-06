@@ -1,15 +1,13 @@
 package gov.epa.ccte.api.hazard.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.time.Instant;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -59,8 +57,5 @@ public class GenetoxDetail {
     @Column(name = "rn")
     private Long rn;
 
-    @NotNull
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
 
 }
