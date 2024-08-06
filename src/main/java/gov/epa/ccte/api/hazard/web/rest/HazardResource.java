@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.Hazard}s.
- */
-
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
