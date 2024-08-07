@@ -42,5 +42,5 @@ jobs:
           cf_password: ${{ secrets.CF_SERVICE_KEY }}
           cf_org: sandbox-epa
           cf_space: powell.joshua
-          cf_manifest: ./manifest-stg.yml
+          cf_manifest: ./manifest-sandbox.yml
           #command: cf bind-service ccte-hazard-stg ccte-db-stg
