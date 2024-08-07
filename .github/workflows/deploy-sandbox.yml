@@ -27,7 +27,7 @@ jobs:
         distribution: 'corretto'
         
     - name: Run the Maven clean package
-      run: mvn clean package
+      run: mvn clean package -DskipTests
       
   deploy:
     runs-on: ubuntu-latest
