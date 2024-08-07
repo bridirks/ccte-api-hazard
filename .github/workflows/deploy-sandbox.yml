@@ -28,6 +28,9 @@ jobs:
         
     - name: Run the Maven clean package
       run: mvn clean package -DskipTests
+
+    - name: Check target directory
+      run: ls -la ./target
       
   deploy:
     runs-on: ubuntu-latest
