@@ -1,6 +1,8 @@
 name: deploy-sandbox
 
 on:
+  push:
+    branches: [ "DEV-879" ]
   workflow_dispatch:
     inputs:
       logLevel:
