@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Check target directory
-        run: ls -la ./target
+        run: ls -la
       - name: Deploy to cloud.gov
         uses: cloud-gov/cg-cli-tools@main
         with:
