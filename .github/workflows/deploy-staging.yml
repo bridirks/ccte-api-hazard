@@ -2,7 +2,7 @@ name: deploy-staging
 
 on:
   push:
-    branches: [ "DEV-8792" ]
+    branches: [ "DEV-879" ]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -52,4 +52,4 @@ jobs:
           cf_org: epa-ccte
           cf_space: staging
           cf_manifest: ./manifest-auto-staging.yml
-          #command: cf bind-service ccte-hazard-stg ccte-db-stg
+          command: cf bind-service ccte-hazard-auto-staging ccte-db-stg
