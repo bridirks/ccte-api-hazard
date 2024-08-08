@@ -1,8 +1,8 @@
-name: deploy-sandbox
+name: deploy-staging
 
 on:
   push:
-    branches: [ "DEV-879" ]
+    branches: [ "DEV-8792" ]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -47,9 +47,9 @@ jobs:
       - name: Deploy to cloud.gov
         uses: cloud-gov/cg-cli-tools@main
         with:
-          cf_username: ${{ secrets.CF_SERVICE_USERNAME }}
-          cf_password: ${{ secrets.CF_SERVICE_KEY }}
-          cf_org: sandbox-epa
-          cf_space: powell.joshua
-          cf_manifest: ./manifest-sandbox.yml
+          cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
+          cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
+          cf_org: epa-ccte
+          cf_space: staging
+          cf_manifest: ./manifest-auto-staging.yml
           #command: cf bind-service ccte-hazard-stg ccte-db-stg
