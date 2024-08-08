@@ -1,10 +1,10 @@
 ---
 applications:
-  - name: ccte-hazard-sandbox
+  - name: ccte-hazard-auto-staging
     routes:
       #- route: ccte-hazard-p.app.cloud.gov
       #- route: ccte-api-s.app.cloud.gov/hazard
-      - route: api-ccte-sandbox.app.cloud.gov/hazard
+      - route: api-ccte-auto-stg.app.cloud.gov/hazard
     memory: 1G
     instances: 1
     random-route: false
