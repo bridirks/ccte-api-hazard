@@ -2,7 +2,7 @@ name: deploy-staging
 
 on:
   push:
-    branches: [ "staging" ]
+    branches: [ "staging", "DEV-879" ]
   workflow_dispatch:
     inputs:
       logLevel:
