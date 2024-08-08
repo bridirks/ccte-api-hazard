@@ -52,13 +52,14 @@ jobs:
           cf_org: epa-ccte
           cf_space: staging
           cf_manifest: ./manifest-auto-staging.yml
+          cf_command: cf push --no-start
           
   bind-db-service:
     runs-on: ubuntu-latest
     needs: deploy
     
     steps:
-      - name: Deploy to cloud.gov
+      - name: Bind app to DB service
         uses: cloud-gov/cg-cli-tools@main
         with:
           cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
@@ -66,3 +67,17 @@ jobs:
           cf_org: epa-ccte
           cf_space: staging
           cf_command: cf bind-service ccte-hazard-auto-staging ccte-db-prod2
+          
+  restage:
+    runs-on: ubuntu-latest
+    needs: deploy
+    
+    steps:
+      - name: Restage app
+        uses: cloud-gov/cg-cli-tools@main
+        with:
+          cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
+          cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
+          cf_org: epa-ccte
+          cf_space: staging
+          cf_command: cf restage ccte-hazard-auto-staging
