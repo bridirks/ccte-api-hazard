@@ -19,6 +19,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: staging
     - uses: actions/setup-java@v4
       with:
         java-version: '17'
@@ -38,6 +40,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: staging
       - uses: actions/download-artifact@master
         with:
           name: hazard-jar
