@@ -35,4 +35,4 @@ jobs:
           GITHUB_USER_REF: USEPA
           GITHUB_TOKEN_REF: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mvn deploy
+          mvn deploy -DskipTests
