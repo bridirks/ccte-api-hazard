@@ -19,6 +19,15 @@
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.3.Final</mapstruct.version>
 	</properties>
+
+	<distributionManagement>
+        	<repository>
+            		<id>github</id>
+            		<name>GitHub OWNER Apache Maven Packages</name>
+            		<url>https://maven.pkg.github.com/USEPA/cheminf-pom-package</url>
+        	</repository>
+    	</distributionManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
