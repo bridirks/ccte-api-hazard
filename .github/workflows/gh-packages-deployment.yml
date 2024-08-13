@@ -7,7 +7,7 @@ name: GH Packages Deployment
 
 on:
   push:
-    branches: [ "DEV-8855" ]
+    branches: [ "DEV-885" ]
 
 jobs:
   maven-build-deploy:
@@ -29,7 +29,7 @@ jobs:
           GITHUB_USER_REF: USEPA
           GITHUB_TOKEN_REF: ${{ secrets.GH_PACKAGE_REPO_PASSWORD }}
         run: |
-          mvn package
+          mvn clean package
       - name: Deploy to Github Package Registry
         env:
           GITHUB_USER_REF: USEPA
