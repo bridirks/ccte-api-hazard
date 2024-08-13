@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>gov.epa.ccte.api</groupId>
 	<artifactId>hazard</artifactId>
-	<version>1</version>
+	<version>1.0.0</version>
 	<name>hazard</name>
 	<description>project for hazard data</description>
 	<properties>
@@ -129,7 +129,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
