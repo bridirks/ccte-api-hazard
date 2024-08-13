@@ -24,7 +24,7 @@
         	<repository>
             		<id>github</id>
             		<name>GitHub OWNER Apache Maven Packages</name>
-            		<url>https://maven.pkg.github.com/USEPA/cheminf-pom-package</url>
+            		<url>https://maven.pkg.github.com/USEPA/ccte-api-hazard</url>
         	</repository>
     	</distributionManagement>
 	
