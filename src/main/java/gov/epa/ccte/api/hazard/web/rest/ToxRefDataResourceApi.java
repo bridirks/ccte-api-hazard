@@ -33,7 +33,7 @@ public interface ToxRefDataResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefDataSummary.class, ToxRefDataAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/data/by-study-id/{studyId}")
+    @GetMapping(value = "/hazard/toxref/data/search/by-study-id/{studyId}")
     @ResponseBody
     List toxRefDataByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId,
                                                 @RequestParam(value = "projection", required = false, defaultValue = "ToxRefDataSummary") ToxRefDataProjection projection);
@@ -48,7 +48,7 @@ public interface ToxRefDataResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefDataSummary.class, ToxRefDataAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/data/by-dtxsid/{dtxsid}")
+    @GetMapping(value = "/hazard/toxref/data/search/by-dtxsid/{dtxsid}")
     @ResponseBody
     List toxRefDataByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid,
                             @RequestParam(value = "projection", required = false, defaultValue = "ToxRefDataSummary") ToxRefDataProjection projection);
@@ -64,7 +64,7 @@ public interface ToxRefDataResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefDataSummary.class, ToxRefDataAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/data/by-study-type/{studyType}")
+    @GetMapping(value = "/hazard/toxref/data/search/by-study-type/{studyType}")
     @ResponseBody
     List toxRefDataByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType,
                                @RequestParam(value = "projection", required = false, defaultValue = "ToxRefDataSummary") ToxRefDataProjection projection);
