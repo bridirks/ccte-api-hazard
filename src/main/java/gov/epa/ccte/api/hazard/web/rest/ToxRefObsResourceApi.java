@@ -31,7 +31,7 @@ public interface ToxRefObsResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefObsAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/observations/by-study-id/{studyId}")
+    @GetMapping(value = "/hazard/toxref/observations/search/by-study-id/{studyId}")
     @ResponseBody
     List<ToxRefObsAll> toxRefObsByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId);
 
@@ -45,7 +45,7 @@ public interface ToxRefObsResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefObsAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/observations/by-dtxsid/{dtxsid}")
+    @GetMapping(value = "/hazard/toxref/observations/search/by-dtxsid/{dtxsid}")
     @ResponseBody
     List<ToxRefObsAll> toxRefObsByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid);
 
@@ -59,7 +59,7 @@ public interface ToxRefObsResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefObsAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/observations/by-study-type/{studyType}")
+    @GetMapping(value = "/hazard/toxref/observations/search/by-study-type/{studyType}")
     @ResponseBody
     List<ToxRefObsAll> toxRefObsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
 
