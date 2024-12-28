@@ -33,7 +33,7 @@ public interface ToxRefEffectsResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefEffectsSummary.class, ToxRefEffectsAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/effects/by-study-id/{studyId}")
+    @GetMapping(value = "/hazard/toxref/effects/search/by-study-id/{studyId}")
     @ResponseBody
     List toxRefEffectsByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId,
                                                       @RequestParam(value = "projection", required = false, defaultValue = "ToxRefEffectsSummary") ToxRefEffectsProjection projection);
@@ -49,7 +49,7 @@ public interface ToxRefEffectsResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefEffectsSummary.class, ToxRefEffectsAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/effects/by-dtxsid/{dtxsid}")
+    @GetMapping(value = "/hazard/toxref/effects/search/by-dtxsid/{dtxsid}")
     @ResponseBody
     List toxRefEffectsByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid,
                                                      @RequestParam(value = "projection", required = false, defaultValue = "ToxRefEffectsSummary") ToxRefEffectsProjection projection);
@@ -65,7 +65,7 @@ public interface ToxRefEffectsResourceApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = {ToxRefEffectsSummary.class, ToxRefEffectsAll.class})))
     })
-    @GetMapping(value = "/hazard/toxref/effects/by-study-type/{studyType}")
+    @GetMapping(value = "/hazard/toxref/effects/search/by-study-type/{studyType}")
     @ResponseBody
     List toxRefEffectsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType,
                                                         @RequestParam(value = "projection", required = false, defaultValue = "ToxRefEffectsSummary") ToxRefEffectsProjection projection);
