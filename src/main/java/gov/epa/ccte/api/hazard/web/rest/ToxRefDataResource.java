@@ -27,7 +27,7 @@ public class ToxRefDataResource implements ToxRefDataResourceApi {
     List<ToxRefDataAll> toxRefDataByStudyId(Integer studyId) {
         log.debug("all Tox Ref Data by Study ID = {}", studyId);
 
-        List<ToxRefObsAll> data = repository.findAllByStudyId(studyId, ToxRefDataAll.class);
+        List<ToxRefDataAll> data = repository.findAllByStudyId(studyId, ToxRefDataAll.class);
 
         return data;
     }
