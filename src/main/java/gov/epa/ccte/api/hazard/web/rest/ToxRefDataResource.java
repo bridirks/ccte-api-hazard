@@ -23,35 +23,34 @@ public class ToxRefDataResource implements ToxRefDataResourceApi {
     }
 
     @Override
-    @ResponseBody
-    public List toxRefDataByStudyId(Integer studyId) {
+    public @ResponseBody
+    List<ToxRefDataAll> toxRefDataByStudyId(Integer studyId) {
         log.debug("all Tox Ref Data by Study ID = {}", studyId);
 
-        return repository.findAllByStudyId(studyId, ToxRefDataAll.class);
-            
-        };
+        List<ToxRefObsAll> data = repository.findAllByStudyId(studyId, ToxRefDataAll.class);
 
+        return data;
     }
+
 
     @Override
-    @ResponseBody
-    public List toxRefDataByDtxsid(String dtxsid, ToxRefDataProjection projection) {
-        log.debug("all Tox Ref Data by DTXSID  = {}", dtxsid);
+    public @ResponseBody
+    List<ToxRefDataAll> toxRefDataByDtxsid(Integer dtxsid) {
+        log.debug("all Tox Ref Data by DTXSID = {}", dtxsid);
 
-        return switch (projection) {
-            case ToxRefDataSummary -> repository.findAllByDtxsid(dtxsid, ToxRefDataSummary.class);
-            case ToxRefDataAll -> repository.findAllByDtxsid(dtxsid, ToxRefDataAll.class);
-        };
-    }
+        List<ToxRefDataAll> data = repository.findAllByDtxsid(dtxsid, ToxRefDataAll.class);
 
-    @ResponseBody
-    public List toxRefDataByStudyType(String studyType, ToxRefDataProjection projection) {
+        return data;
+    }    
+
+
+    @Override
+    public @ResponseBody
+    List<ToxRefDataAll> toxRefDataByStudyType(Integer studyType) {
         log.debug("all Tox Ref Data by Study Type = {}", studyType);
 
-        return switch (projection) {
-            case ToxRefDataSummary -> repository.findAllByStudyType(studyType, ToxRefDataSummary.class);
-            case ToxRefDataAll -> repository.findAllByStudyType(studyType, ToxRefDataAll.class);
-        };
+        List<ToxRefDataAll> data = repository.findAllByStudyType(studyType, ToxRefDataAll.class);
 
+        return data;
     }
 }
