@@ -26,35 +26,34 @@ public class ToxRefEffectsResource implements ToxRefEffectsResourceApi {
 
     @Override
     public @ResponseBody
-    List toxRefEffectsByStudyId(Integer studyId, ToxRefEffectsProjection projection) {
+    List<ToxRefEffectsAll> toxRefEffectsByStudyId(Integer studyId) {
         log.debug("all Tox Ref Effects by Study ID = {}", studyId);
 
-        return switch (projection) {
-            case ToxRefEffectsSummary -> repository.findAllByStudyId(studyId, ToxRefEffectsSummary.class);
-            case ToxRefEffectsAll -> repository.findAllByStudyId(studyId, ToxRefEffectsAll.class);
-        };
+        List<ToxRefEffectsAll> data = repository.findAllByStudyId(studyId, ToxRefEffectsAll.class);
+
+        return data;
     }
+
 
     @Override
     public @ResponseBody
-    List toxRefEffectsByDtxsid(String dtxsid, ToxRefEffectsProjection projection) {
-        log.debug("all Tox Ref Effects by DTXSID  = {}", dtxsid);
+    List<ToxRefEffectsAll> toxRefEffectsByDtxsid(Integer dtxsid) {
+        log.debug("all Tox Ref Effects by DTXSID = {}", dtxsid);
 
-        return switch (projection) {
-            case ToxRefEffectsSummary -> repository.findAllByDtxsid(dtxsid, ToxRefEffectsSummary.class);
-            case ToxRefEffectsAll -> repository.findAllByDtxsid(dtxsid, ToxRefEffectsAll.class);
-        };
-    }
+        List<ToxRefEffectsAll> data = repository.findAllByDtxsid(dtxsid, ToxRefEffectsAll.class);
+
+        return data;
+    }    
+
 
     @Override
     public @ResponseBody
-    List toxRefEffectsByStudyType(String studyType, ToxRefEffectsProjection projection) {
+    List<ToxRefEffectsAll> toxRefEffectsByStudyType(Integer studyType) {
         log.debug("all Tox Ref Effects by Study Type = {}", studyType);
 
-        return switch (projection) {
-            case ToxRefEffectsSummary -> repository.findAllByStudyType(studyType, ToxRefEffectsSummary.class);
-            case ToxRefEffectsAll -> repository.findAllByStudyType(studyType, ToxRefEffectsAll.class);
-        };
+        List<ToxRefEffectsAll> data = repository.findAllByStudyType(studyType, ToxRefEffectsAll.class);
+
+        return data;
     }
 }
 
