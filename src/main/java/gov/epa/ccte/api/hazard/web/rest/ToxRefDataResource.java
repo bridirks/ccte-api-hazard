@@ -24,12 +24,11 @@ public class ToxRefDataResource implements ToxRefDataResourceApi {
 
     @Override
     @ResponseBody
-    public List toxRefDataByStudyId(Integer studyId, ToxRefDataProjection projection) {
+    public List toxRefDataByStudyId(Integer studyId) {
         log.debug("all Tox Ref Data by Study ID = {}", studyId);
 
-        return switch (projection) {
-            case ToxRefDataSummary -> repository.findAllByStudyId(studyId, ToxRefDataSummary.class);
-            case ToxRefDataAll -> repository.findAllByStudyId(studyId, ToxRefDataAll.class);
+        return repository.findAllByStudyId(studyId, ToxRefDataAll.class);
+            
         };
 
     }
