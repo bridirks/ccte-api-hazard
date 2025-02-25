@@ -51,8 +51,8 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: staging
+          cf_org: epa-ord
+          cf_space: ccte-stg
           cf_command: push -f manifest-stg.yml --no-start
           
   bind-db-service:
@@ -65,9 +65,9 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: staging
-          cf_command: bind-service ccte-hazard-stg ccte-db-prod2
+          cf_org: epa-ord
+          cf_space: ccte-stg
+          cf_command: bind-service ccte-hazard-stg db-prod
           
   restage:
     runs-on: ubuntu-latest
@@ -79,6 +79,6 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: staging
+          cf_org: epa-ord
+          cf_space: ccte-stg
           cf_command: restage ccte-hazard-stg

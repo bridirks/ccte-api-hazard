@@ -51,8 +51,8 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: prod
+          cf_org: epa-ord
+          cf_space: ccte-prod
           cf_command: push -f manifest-prod.yml --no-start
           
   bind-db-service:
@@ -65,9 +65,9 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: prod
-          cf_command: bind-service ccte-hazard-prod ccte-db-prod2
+          cf_org: epa-ord
+          cf_space: ccte-prod
+          cf_command: bind-service ccte-hazard-prod db-prod
           
   restage:
     runs-on: ubuntu-latest
@@ -79,6 +79,6 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: prod
+          cf_org: epa-ord
+          cf_space: ccte-prod
           cf_command: restage ccte-hazard-prod
