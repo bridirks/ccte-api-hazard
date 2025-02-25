@@ -1,8 +1,6 @@
 name: deploy-staging
 
 on:
-  push:
-    branches: [ "DEV-993" ]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -22,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: DEV-993
+        ref: staging
     - uses: actions/setup-java@v4
       with:
         java-version: '17'
@@ -43,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: DEV-993
+          ref: staging
       - uses: actions/download-artifact@master
         with:
           name: hazard-jar
