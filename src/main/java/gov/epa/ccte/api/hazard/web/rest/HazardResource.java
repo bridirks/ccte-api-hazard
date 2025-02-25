@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class HazardResource implements HazardResourceApi {
+public class HazardResource implements HazardApi {
     final private HazardRepository repository;
     private final JdbcTemplate jdbcTemplate;
 

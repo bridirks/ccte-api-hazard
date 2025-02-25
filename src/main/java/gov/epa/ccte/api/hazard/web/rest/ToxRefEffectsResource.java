@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class ToxRefEffectsResource implements ToxRefEffectsResourceApi {
+public class ToxRefEffectsResource implements ToxRefEffectsApi {
 
     private final ToxRefEffectsRepository repository;
 

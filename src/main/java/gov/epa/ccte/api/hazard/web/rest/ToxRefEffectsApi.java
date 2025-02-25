@@ -22,7 +22,7 @@ import java.util.List;
 @Tag(name = "Tox Ref Effects Resource",
         description = "API endpoints for collecting ToxRefDB effects information.")
 @SecurityRequirement(name = "api_key")
-public interface ToxRefEffectsResourceApi {
+public interface ToxRefEffectsApi {
     /**
      * {@code GET  hazard/toxref/effects/by-study-id/{study-id} : get list of ToxRefDB effects information for the "study id".
      * @param study-id the matching study-id of the ToxRefDB effects information to retrieve.

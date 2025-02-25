@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class CancerSummaryResource implements CancerSummaryResourceApi {
+public class CancerSummaryResource implements CancerSummaryApi {
     private final CancerSummaryRepository repository;
 
     @Value("${application.batch-size}")

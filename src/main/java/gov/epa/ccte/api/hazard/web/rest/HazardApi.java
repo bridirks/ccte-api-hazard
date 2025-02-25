@@ -24,7 +24,7 @@ import java.util.List;
 @Tag(name = "Hazard Resource",
         description = "API endpoints for collecting hazard data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
-public interface HazardResourceApi {
+public interface HazardApi {
     @SuppressWarnings("rawtypes")
     @Hidden
     @GetMapping("/hazard/health")

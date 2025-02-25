@@ -27,7 +27,7 @@ import java.util.List;
         description = "API endpoints for collecting Genetox data.")
 @SecurityRequirement(name = "api_key")
 @RequestMapping( value = "hazard/genetox", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface GenetoxResourceApi {
+public interface GenetoxApi {
     /**
      * {@code GET  hazard/genetox/summary/search/by-dtxsid/{dtxsid} : get list of genetox summary data for the "dtxsid".
      * @param dtxsid the matching dtxsid of the genetox summary data to retrieve.

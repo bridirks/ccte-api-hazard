@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class SkinEyeResource implements SkinEyeResourceApi {
+public class SkinEyeResource implements SkinEyeApi {
 
     private final SkinEyeRepository repository;
     @Value("${application.batch-size}")

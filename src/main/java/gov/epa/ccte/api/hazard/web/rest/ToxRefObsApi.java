@@ -20,7 +20,7 @@ import java.util.List;
 @Tag(name = "Tox Ref Observation Resource",
         description = "API endpoints for collecting ToxRefDB data.")
 @SecurityRequirement(name = "api_key")
-public interface ToxRefObsResourceApi {
+public interface ToxRefObsApi {
     /**
      * {@code GET  hazard/toxref/observations/by-study-id/{study-id} : get list of ToxRefDB observations for the "study id"
      * @param study-id the matching study-id of the ToxRefDB observations to retrieve.
