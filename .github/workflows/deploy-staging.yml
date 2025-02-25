@@ -1,6 +1,8 @@
 name: deploy-staging
 
 on:
+  push:
+    branches: [ "DEV-993" ]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -20,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: staging
+        ref: DEV-993
     - uses: actions/setup-java@v4
       with:
         java-version: '17'
@@ -41,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: staging
+          ref: DEV-993
       - uses: actions/download-artifact@master
         with:
           name: hazard-jar
@@ -51,8 +53,8 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: staging
+          cf_org: epa-ord
+          cf_space: ccte-stg
           cf_command: push -f manifest-stg.yml --no-start
           
   bind-db-service:
@@ -65,9 +67,9 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: staging
-          cf_command: bind-service ccte-hazard-stg ccte-db-prod2
+          cf_org: epa-ord
+          cf_space: ccte-stg
+          cf_command: bind-service ccte-hazard-stg db-prod
           
   restage:
     runs-on: ubuntu-latest
@@ -79,6 +81,6 @@ jobs:
         with:
           cf_username: ${{ secrets.CF_STAGING_SERVICE_USERNAME }}
           cf_password: ${{ secrets.CF_STAGING_SERVICE_KEY }}
-          cf_org: epa-ccte
-          cf_space: staging
+          cf_org: epa-ord
+          cf_space: ccte-stg
           cf_command: restage ccte-hazard-stg
