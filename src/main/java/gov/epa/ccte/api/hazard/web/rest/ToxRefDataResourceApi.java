@@ -31,12 +31,11 @@ public interface ToxRefDataResourceApi {
     @Operation(summary = "Get data by study id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefDataSummary.class, ToxRefDataAll.class})))
+                    schema = @Schema(oneOf = {ToxRefDataAll.class})))
     })
     @GetMapping(value = "/hazard/toxref/data/search/by-study-id/{studyId}")
     @ResponseBody
-    List toxRefDataByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId,
-                                                @RequestParam(value = "projection", required = false, defaultValue = "ToxRefDataSummary") ToxRefDataProjection projection);
+    List toxRefDataByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId);
 
     /**
      * {@code GET  hazard/toxref/data/by-dtxsid/{dtxsid} : get list of ToxRefDB data for the "dtxsid".
@@ -46,12 +45,11 @@ public interface ToxRefDataResourceApi {
     @Operation(summary = "Get data by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefDataSummary.class, ToxRefDataAll.class})))
+                    schema = @Schema(oneOf = {ToxRefDataAll.class})))
     })
     @GetMapping(value = "/hazard/toxref/data/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List toxRefDataByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid,
-                            @RequestParam(value = "projection", required = false, defaultValue = "ToxRefDataSummary") ToxRefDataProjection projection);
+    List toxRefDataByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid);
 
 
     /**
@@ -62,12 +60,11 @@ public interface ToxRefDataResourceApi {
     @Operation(summary = "Get data by study type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefDataSummary.class, ToxRefDataAll.class})))
+                    schema = @Schema(oneOf = {ToxRefDataAll.class})))
     })
     @GetMapping(value = "/hazard/toxref/data/search/by-study-type/{studyType}")
     @ResponseBody
-    List toxRefDataByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType,
-                               @RequestParam(value = "projection", required = false, defaultValue = "ToxRefDataSummary") ToxRefDataProjection projection);
+    List toxRefDataByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
 
 
 }
