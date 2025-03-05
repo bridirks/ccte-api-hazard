@@ -1,8 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataAll;
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataProjection;
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataSummary;
+import gov.epa.ccte.api.hazard.projection.ToxRefDataAll;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
