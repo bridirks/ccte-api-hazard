@@ -1,8 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataAll;
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataProjection;
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataSummary;
+import gov.epa.ccte.api.hazard.projection.ToxRefDataAll;
 import gov.epa.ccte.api.hazard.repository.ToxRefDataRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;

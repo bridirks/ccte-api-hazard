@@ -1,12 +1,7 @@
 package gov.epa.ccte.api.hazard.projection;
 
-import gov.epa.ccte.api.hazard.domain.ToxRefEffects;
+public interface ToxRefBatchAll {
 
-/**
- * Projection for {@link ToxRefEffects}
- */
-
-public interface ToxRefEffectsAll {
     Integer getStudyId();
 
     String getDtxsid();
@@ -21,7 +16,7 @@ public interface ToxRefEffectsAll {
 
     String getCitation();
 
-    Integer getStudyYear();
+    String getStudyYear();
 
     String getStudyType();
 
@@ -37,7 +32,7 @@ public interface ToxRefEffectsAll {
 
     String getAdminMethod();
 
-    Integer getDoseDuration();
+    String getDoseDuration();
 
     String getDoseDurationUnit();
 
@@ -53,7 +48,7 @@ public interface ToxRefEffectsAll {
 
     Integer getDoseLevel();
 
-    Double getConc();
+    String getConc();
 
     String getConcUnit();
 
@@ -61,7 +56,7 @@ public interface ToxRefEffectsAll {
 
     String getDoseComment();
 
-    java.math.BigDecimal getDoseAdjusted();
+    String getDoseAdjusted();
 
     String getDoseAdjustedUnit();
 
@@ -71,7 +66,7 @@ public interface ToxRefEffectsAll {
 
     String getLifeStage();
 
-    java.math.BigDecimal getNumAnimals();
+    String getNumAnimals();
 
     String getTgComment();
 
@@ -93,27 +88,24 @@ public interface ToxRefEffectsAll {
 
     String getEffectComment();
 
-    Boolean getTreatmentRelated();
+    String getTreatmentRelated();
 
     Boolean getCriticalEffect();
 
     String getSampleSize();
 
-    Double getEffectVal();
+    String getEffectVal();
 
     String getEffectValUnit();
 
-    Double getEffectVar();
+    String getEffectVar();
 
     String getEffectVarType();
 
-    Double getTime();
+    String getTime();
 
     String getTimeUnit();
 
-    Boolean getNoQuantDataReported();
+    Long getTbsKey();
 
-    java.time.LocalDate getExportDate();
-
-    String getVersion();
 }

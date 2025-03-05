@@ -1,4 +1,4 @@
-package gov.epa.ccte.api.hazard.projection.toxrefdata;
+package gov.epa.ccte.api.hazard.projection;
 
 import gov.epa.ccte.api.hazard.domain.ToxRefData;
 
