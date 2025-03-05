@@ -37,7 +37,7 @@ public class ToxRefEffectsResource implements ToxRefEffectsResourceApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefEffectsAll> toxRefEffectsByDtxsid(Integer dtxsid) {
+    List<ToxRefEffectsAll> toxRefEffectsByDtxsid(String dtxsid) {
         log.debug("all Tox Ref Effects by DTXSID = {}", dtxsid);
 
         List<ToxRefEffectsAll> data = repository.findAllByDtxsid(dtxsid, ToxRefEffectsAll.class);
@@ -48,7 +48,7 @@ public class ToxRefEffectsResource implements ToxRefEffectsResourceApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefEffectsAll> toxRefEffectsByStudyType(Integer studyType) {
+    List<ToxRefEffectsAll> toxRefEffectsByStudyType(String studyType) {
         log.debug("all Tox Ref Effects by Study Type = {}", studyType);
 
         List<ToxRefEffectsAll> data = repository.findAllByStudyType(studyType, ToxRefEffectsAll.class);

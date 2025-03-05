@@ -35,7 +35,7 @@ public class ToxRefDataResource implements ToxRefDataResourceApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefDataAll> toxRefDataByDtxsid(Integer dtxsid) {
+    List<ToxRefDataAll> toxRefDataByDtxsid(String dtxsid) {
         log.debug("all Tox Ref Data by DTXSID = {}", dtxsid);
 
         List<ToxRefDataAll> data = repository.findAllByDtxsid(dtxsid, ToxRefDataAll.class);
@@ -46,7 +46,7 @@ public class ToxRefDataResource implements ToxRefDataResourceApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefDataAll> toxRefDataByStudyType(Integer studyType) {
+    List<ToxRefDataAll> toxRefDataByStudyType(String studyType) {
         log.debug("all Tox Ref Data by Study Type = {}", studyType);
 
         List<ToxRefDataAll> data = repository.findAllByStudyType(studyType, ToxRefDataAll.class);
