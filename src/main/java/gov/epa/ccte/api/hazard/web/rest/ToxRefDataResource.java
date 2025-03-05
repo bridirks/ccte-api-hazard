@@ -1,8 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
 import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataAll;
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataProjection;
-import gov.epa.ccte.api.hazard.projection.toxrefdata.ToxRefDataSummary;
 import gov.epa.ccte.api.hazard.repository.ToxRefDataRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class ToxRefDataResource implements ToxRefDataApi {
+	
     private final ToxRefDataRepository repository;
 
     public ToxRefDataResource(ToxRefDataRepository repository) {
@@ -23,36 +22,34 @@ public class ToxRefDataResource implements ToxRefDataApi {
     }
 
     @Override
-    @ResponseBody
-    public List toxRefDataByStudyId(Integer studyId, ToxRefDataProjection projection) {
+    public @ResponseBody
+    List<ToxRefDataAll> toxRefDataByStudyId(Integer studyId) {
         log.debug("all Tox Ref Data by Study ID = {}", studyId);
 
-        return switch (projection) {
-            case ToxRefDataSummary -> repository.findAllByStudyId(studyId, ToxRefDataSummary.class);
-            case ToxRefDataAll -> repository.findAllByStudyId(studyId, ToxRefDataAll.class);
-        };
+        List<ToxRefDataAll> data = repository.findAllByStudyId(studyId, ToxRefDataAll.class);
 
+        return data;
     }
+
 
     @Override
-    @ResponseBody
-    public List toxRefDataByDtxsid(String dtxsid, ToxRefDataProjection projection) {
-        log.debug("all Tox Ref Data by DTXSID  = {}", dtxsid);
+    public @ResponseBody
+    List<ToxRefDataAll> toxRefDataByDtxsid(String dtxsid) {
+        log.debug("all Tox Ref Data by DTXSID = {}", dtxsid);
 
-        return switch (projection) {
-            case ToxRefDataSummary -> repository.findAllByDtxsid(dtxsid, ToxRefDataSummary.class);
-            case ToxRefDataAll -> repository.findAllByDtxsid(dtxsid, ToxRefDataAll.class);
-        };
-    }
+        List<ToxRefDataAll> data = repository.findAllByDtxsid(dtxsid, ToxRefDataAll.class);
 
-    @ResponseBody
-    public List toxRefDataByStudyType(String studyType, ToxRefDataProjection projection) {
+        return data;
+    }    
+
+
+    @Override
+    public @ResponseBody
+    List<ToxRefDataAll> toxRefDataByStudyType(String studyType) {
         log.debug("all Tox Ref Data by Study Type = {}", studyType);
 
-        return switch (projection) {
-            case ToxRefDataSummary -> repository.findAllByStudyType(studyType, ToxRefDataSummary.class);
-            case ToxRefDataAll -> repository.findAllByStudyType(studyType, ToxRefDataAll.class);
-        };
+        List<ToxRefDataAll> data = repository.findAllByStudyType(studyType, ToxRefDataAll.class);
 
+        return data;
     }
 }
