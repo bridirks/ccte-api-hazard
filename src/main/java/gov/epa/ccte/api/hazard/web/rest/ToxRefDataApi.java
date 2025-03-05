@@ -47,7 +47,7 @@ public interface ToxRefDataApi {
     })
     @GetMapping(value = "/hazard/toxref/data/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List<ToxRefDataAll> toxRefDataByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") Integer dtxsid);
+    List<ToxRefDataAll> toxRefDataByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid);
 
 
     /**
@@ -62,5 +62,5 @@ public interface ToxRefDataApi {
     })
     @GetMapping(value = "/hazard/toxref/data/search/by-study-type/{studyType}")
     @ResponseBody
-    List<ToxRefDataAll> toxRefDataByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") Integer studyType);
+    List<ToxRefDataAll> toxRefDataByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
 }
