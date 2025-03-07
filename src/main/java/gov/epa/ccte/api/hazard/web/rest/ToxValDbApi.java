@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.HazardAll;
+import gov.epa.ccte.api.hazard.projection.ToxValDbAll;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.Hazard}s.
+ * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxValDb}s.
  */
-@Tag(name = "Hazard Resource",
+@Tag(name = "ToxValDb Resource",
         description = "API endpoints for collecting hazard data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
-public interface HazardResourceApi {
+public interface ToxValDbApi {
     @SuppressWarnings("rawtypes")
     @Hidden
     @GetMapping("/hazard/health")
@@ -38,11 +38,11 @@ public interface HazardResourceApi {
     @Operation(summary = "Get all data by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {HazardAll.class})))
+                    schema = @Schema(oneOf = {ToxValDbAll.class})))
     })
     @RequestMapping(value = "hazard/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
     @ResponseBody
-    List<HazardAll> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
+    List<ToxValDbAll> hazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                    @PathVariable("dtxsid") String dtxsid);
 
     /**
@@ -53,7 +53,7 @@ public interface HazardResourceApi {
     @Operation(summary = "Get all data by batch of dtxsid(s).", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {HazardAll.class}))),
+                    schema = @Schema(oneOf = {ToxValDbAll.class}))),
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
                             examples = {@ExampleObject(value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
@@ -61,7 +61,7 @@ public interface HazardResourceApi {
     })
     @RequestMapping(value = "hazard/search/by-dtxsid/", method = RequestMethod.POST)
     @ResponseBody
-    List<HazardAll> hazardBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<ToxValDbAll> hazardBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                 @RequestBody String[] dtxsids);
@@ -74,11 +74,11 @@ public interface HazardResourceApi {
     @Operation(summary = "Get human data by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {HazardAll.class})))
+                    schema = @Schema(oneOf = {ToxValDbAll.class})))
     })
     @RequestMapping(value = "hazard/human/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
     @ResponseBody
-    List<HazardAll> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
+    List<ToxValDbAll> humanHazardByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
                                         @PathVariable("dtxsid") String dtxsid);
 
     /**
@@ -89,7 +89,7 @@ public interface HazardResourceApi {
     @Operation(summary = "Get human data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {HazardAll.class}))),
+                    schema = @Schema(oneOf = {ToxValDbAll.class}))),
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
                             examples = {@ExampleObject(value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
@@ -97,7 +97,7 @@ public interface HazardResourceApi {
     })
     @RequestMapping(value = "hazard/human/search/by-dtxsid/", method = RequestMethod.POST)
     @ResponseBody
-    List<HazardAll> humanBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<ToxValDbAll> humanBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                @RequestBody String[] dtxsids);
@@ -110,11 +110,11 @@ public interface HazardResourceApi {
     @Operation(summary = "Get eco data by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {HazardAll.class})))
+                    schema = @Schema(oneOf = {ToxValDbAll.class})))
     })
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET)
     @ResponseBody
-    List<HazardAll> ecoHazardByDtxsid(
+    List<ToxValDbAll> ecoHazardByDtxsid(
             @Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125")
             @PathVariable("dtxsid") String dtxsid);
 
@@ -126,7 +126,7 @@ public interface HazardResourceApi {
     @Operation(summary = "Get eco data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {HazardAll.class}))),
+                    schema = @Schema(oneOf = {ToxValDbAll.class}))),
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
                             examples = {@ExampleObject(value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
@@ -134,7 +134,7 @@ public interface HazardResourceApi {
     })
     @RequestMapping(value = "hazard/eco/search/by-dtxsid/", method = RequestMethod.POST)
     @ResponseBody
-    List<HazardAll> ecoBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<ToxValDbAll> ecoBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                              @RequestBody String[] dtxsids);

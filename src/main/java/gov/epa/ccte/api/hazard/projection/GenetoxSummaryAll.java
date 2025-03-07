@@ -5,17 +5,23 @@ package gov.epa.ccte.api.hazard.projection;
  */
 public interface GenetoxSummaryAll {
     Integer getId();
+    
+    String getAmes();
+    
+    String getClowderDocId();
 
     String getDtxsid();
+    
+    String getGenetoxCall();
+    
+    Integer getGenetoxSummaryId();
 
-    Integer getReportsPositive();
+    String getMicronucleus();
 
     Integer getReportsNegative();
 
     Integer getReportsOther();
-
-    String getAmes();
-
-    String getMicronucleus();
+    
+    Integer getReportsPositive();
 
 }

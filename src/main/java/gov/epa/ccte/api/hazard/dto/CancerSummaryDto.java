@@ -1,7 +1,6 @@
 package gov.epa.ccte.api.hazard.dto;
 
 import lombok.Data;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -11,17 +10,18 @@ import jakarta.validation.constraints.Size;
 
 @Data
 public class CancerSummaryDto {
+
     @NotNull
     private final Integer id;
     @Size(max = 255)
-    private final String cancerCall;
-    @Size(max = 255)
     private final String dtxsid;
-    @Size(max = 255)
-    private final String exposureRoute;
-    private final Long rn;
     @Size(max = 255)
     private final String source;
     @Size(max = 255)
+    private final String exposureRoute;
+    @Size(max = 255)
+    private final String cancerCall;
+    @Size(max = 255)
     private final String url;
+
 }

@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import gov.epa.ccte.api.hazard.projection.HazardAll;
+import gov.epa.ccte.api.hazard.projection.ToxValDbAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
-class HazardRepositoryTest {
+class ToxValDbRepositoryTest {
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> pgsqldb = new PostgreSQLContainer<>("postgres:13-alpine");
@@ -31,7 +31,7 @@ class HazardRepositoryTest {
     private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private TestEntityManager entityManager;
-    @Autowired private HazardRepository repository;
+    @Autowired private ToxValDbRepository repository;
 
     @Test
     void connectionEstablished(){
@@ -52,11 +52,11 @@ class HazardRepositoryTest {
     void testDataLoaded() {assertThat(repository.findAll().size()).isEqualTo(29);}
 
     @Test
-    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid(new String[] {"DTXSID0029054"}, HazardAll.class)).isNotNull(); }
+    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid(new String[] {"DTXSID0029054"}, ToxValDbAll.class)).isNotNull(); }
 
     @Test
-    void findEcoDataByDtxsid() { assertThat(repository.findEcoDataByDtxsid(new String[] {"DTXSID0029054"}, HazardAll.class)).isNotNull(); }
+    void findEcoDataByDtxsid() { assertThat(repository.findEcoDataByDtxsid(new String[] {"DTXSID0029054"}, ToxValDbAll.class)).isNotNull(); }
 
     @Test
-    void findHumanDataByDtxsid() { assertThat(repository.findHumanDataByDtxsid(new String[] {"DTXSID0029054"}, HazardAll.class)).isNotNull(); }
+    void findHumanDataByDtxsid() { assertThat(repository.findHumanDataByDtxsid(new String[] {"DTXSID0029054"}, ToxValDbAll.class)).isNotNull(); }
 }

@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "ToxRef Batch Resource",
         description = "API endpoints for collecting ToxRef data by batch of dtxsids.")
 @SecurityRequirement(name = "api_key")
-public interface ToxRefBatchResourceApi {
+public interface ToxRefBatchApi {
 
     /**
      * {@code POST  hazard/toxref/search/by-dtxsid/{dtxsid} : get list of toxref data for batch "dtxsid".

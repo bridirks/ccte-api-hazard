@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class ToxRefBatchResource implements ToxRefBatchResourceApi{
+public class ToxRefBatchResource implements ToxRefBatchApi{
 
     private final ToxRefBatchRepository repository;
     @Value("${application.batch-size}")

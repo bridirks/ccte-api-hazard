@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class GenetoxResource implements GenetoxResourceApi {
+public class GenetoxResource implements GenetoxApi {
     private final GenetoxDetailRepository detailRepository;
     private final GenetoxSummaryRepository summaryRepository;
 
