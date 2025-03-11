@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.ToxRefObsAll;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,6 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import gov.epa.ccte.api.hazard.domain.ToxRefObs;
+
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
 @Tag(name = "Tox Ref Observation Resource",
         description = "API endpoints for collecting ToxRefDB data.")
 @SecurityRequirement(name = "api_key")
-public interface ToxRefObsResourceApi {
+public interface ToxRefObsApi {
     /**
      * {@code GET  hazard/toxref/observations/by-study-id/{study-id} : get list of ToxRefDB observations for the "study id"
      * @param study-id the matching study-id of the ToxRefDB observations to retrieve.
@@ -29,11 +30,11 @@ public interface ToxRefObsResourceApi {
     @Operation(summary = "Get observations by study id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefObsAll.class})))
+                    schema = @Schema(oneOf = {ToxRefObs.class})))
     })
     @GetMapping(value = "/hazard/toxref/observations/search/by-study-id/{studyId}")
     @ResponseBody
-    List<ToxRefObsAll> toxRefObsByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId);
+    List<ToxRefObs> toxRefObsByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId);
 
     /**
      * {@code GET  hazard/toxref/observations/by-dtxsid/{dtxsid} : get list of ToxRefDB observations for the "dtxsid".
@@ -43,11 +44,11 @@ public interface ToxRefObsResourceApi {
     @Operation(summary = "Get observations by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefObsAll.class})))
+                    schema = @Schema(oneOf = {ToxRefObs.class})))
     })
     @GetMapping(value = "/hazard/toxref/observations/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List<ToxRefObsAll> toxRefObsByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid);
+    List<ToxRefObs> toxRefObsByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid);
 
     /**
      * {@code GET  hazard/toxref/observations/by-study-type/{study-type} : get list of ToxRefDB observations for the "study type".
@@ -57,10 +58,10 @@ public interface ToxRefObsResourceApi {
     @Operation(summary = "Get observations by study type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefObsAll.class})))
+                    schema = @Schema(oneOf = {ToxRefObs.class})))
     })
     @GetMapping(value = "/hazard/toxref/observations/search/by-study-type/{studyType}")
     @ResponseBody
-    List<ToxRefObsAll> toxRefObsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
+    List<ToxRefObs> toxRefObsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
 
 }

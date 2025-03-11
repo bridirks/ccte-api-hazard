@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import gov.epa.ccte.api.hazard.projection.GenetoxDetailAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -12,6 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
 
 import javax.sql.DataSource;
 
@@ -54,9 +55,9 @@ class GenetoxDetailRepositoryTest {
     }
 
     @Test
-    void findByDtxsidOrderBySourceAsc() {assertThat(repository.findByDtxsidOrderBySourceAsc("DTXSID00100670", GenetoxDetailAll.class)).isNotNull();}
+    void findByDtxsidOrderBySourceAsc() {assertThat(repository.findByDtxsidOrderBySourceAsc("DTXSID00100670", GenetoxDetail.class)).isNotNull();}
 
     @Test
-    void findByDtxsidInOrderByDtxsidAsc() {assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00100670,DTXSID00178076"}, GenetoxDetailAll.class)).isNotNull();}
+    void findByDtxsidInOrderByDtxsidAsc() {assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00100670,DTXSID00178076"}, GenetoxDetail.class)).isNotNull();}
 
 }

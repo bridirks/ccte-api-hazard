@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard;
 
-import gov.epa.ccte.api.hazard.repository.HazardRepository;
+import gov.epa.ccte.api.hazard.repository.ToxValDbRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,13 +20,13 @@ public class HazardRepositoryTest {
     private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private TestEntityManager entityManager;
-    @Autowired private HazardRepository hazardRepository;
+    @Autowired private ToxValDbRepository toxValDbRepository;
 
     @Test
     void injectedComponentsAreNotNull(){
         assertThat(dataSource).isNotNull();
         assertThat(jdbcTemplate).isNotNull();
         assertThat(entityManager).isNotNull();
-        assertThat(hazardRepository).isNotNull();
+        assertThat(toxValDbRepository).isNotNull();
     }
 }

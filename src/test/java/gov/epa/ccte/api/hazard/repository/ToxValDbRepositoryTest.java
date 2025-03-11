@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import gov.epa.ccte.api.hazard.projection.HazardAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,6 +12,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import gov.epa.ccte.api.hazard.domain.ToxValDb;
+
 import javax.sql.DataSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
-class HazardRepositoryTest {
+class ToxValDbRepositoryTest {
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> pgsqldb = new PostgreSQLContainer<>("postgres:13-alpine");
@@ -31,7 +32,7 @@ class HazardRepositoryTest {
     private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private TestEntityManager entityManager;
-    @Autowired private HazardRepository repository;
+    @Autowired private ToxValDbRepository repository;
 
     @Test
     void connectionEstablished(){
@@ -52,11 +53,6 @@ class HazardRepositoryTest {
     void testDataLoaded() {assertThat(repository.findAll().size()).isEqualTo(29);}
 
     @Test
-    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid(new String[] {"DTXSID0029054"}, HazardAll.class)).isNotNull(); }
+    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID0029054",  ToxValDb.class)).isNotNull(); }
 
-    @Test
-    void findEcoDataByDtxsid() { assertThat(repository.findEcoDataByDtxsid(new String[] {"DTXSID0029054"}, HazardAll.class)).isNotNull(); }
-
-    @Test
-    void findHumanDataByDtxsid() { assertThat(repository.findHumanDataByDtxsid(new String[] {"DTXSID0029054"}, HazardAll.class)).isNotNull(); }
 }

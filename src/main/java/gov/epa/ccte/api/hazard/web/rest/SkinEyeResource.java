@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.SkinEyeAll;
+import gov.epa.ccte.api.hazard.domain.SkinEye;
 import gov.epa.ccte.api.hazard.repository.SkinEyeRepository;
 import gov.epa.ccte.api.hazard.web.rest.error.HigherNumberOfDtxsidException;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class SkinEyeResource implements SkinEyeResourceApi {
+public class SkinEyeResource implements SkinEyeApi {
 
     private final SkinEyeRepository repository;
     @Value("${application.batch-size}")
@@ -27,23 +27,23 @@ public class SkinEyeResource implements SkinEyeResourceApi {
 
     @Override
     public @ResponseBody
-    List<SkinEyeAll> skinEyedByDtxsid(String dtxsid) {
+    List<SkinEye> skinEyedByDtxsid(String dtxsid) {
         log.debug("all skin eye for dtxsid = {}", dtxsid);
 
-        List<SkinEyeAll> data = repository.findAllByDtxsid(dtxsid, SkinEyeAll.class);
+        List<SkinEye> data = repository.findAllByDtxsid(dtxsid, SkinEye.class);
 
         return data;
     }
 
     @Override
     public @ResponseBody
-    List<SkinEyeAll> skinEyedBatch( String[] dtxsids) {
+    List<SkinEye> skinEyedBatch( String[] dtxsids) {
         log.debug("all skin eye for dtxsid size = {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
             throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
-        List<SkinEyeAll> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, SkinEyeAll.class);
+        List<SkinEye> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, SkinEye.class);
 
         return data;
     }

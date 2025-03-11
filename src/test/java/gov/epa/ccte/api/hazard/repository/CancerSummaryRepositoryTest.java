@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import gov.epa.ccte.api.hazard.projection.CancerSummaryAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -12,6 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import gov.epa.ccte.api.hazard.domain.CancerSummary;
 
 import javax.sql.DataSource;
 
@@ -54,9 +55,9 @@ class CancerSummaryRepositoryTest {
     }
 
     @Test
-    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID0020319", CancerSummaryAll.class)).isNotNull(); }
+    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID0020319", CancerSummary.class)).isNotNull(); }
 
     @Test
-    void findByDtxsidInOrderByDtxsidAsc() { assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID0020319,DTXSID0020076"}, CancerSummaryAll.class)).isNotNull(); }
+    void findByDtxsidInOrderByDtxsidAsc() { assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID0020319,DTXSID0020076"}, CancerSummary.class)).isNotNull(); }
 
 }
