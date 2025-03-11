@@ -1,7 +1,7 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
 
-import gov.epa.ccte.api.hazard.projection.ToxValDbAll;
+import gov.epa.ccte.api.hazard.domain.ToxValDb;
 import gov.epa.ccte.api.hazard.repository.ToxValDbRepository;
 import gov.epa.ccte.api.hazard.web.rest.error.HigherNumberOfDtxsidException;
 import lombok.extern.slf4j.Slf4j;
@@ -52,10 +52,10 @@ public class ToxValDbResource implements ToxValDbApi {
 
     @Override
     public @ResponseBody
-    List<ToxValDbAll> hazardByDtxsid(String dtxsid) {
-        log.debug("all hazard for dtxsid = {}", dtxsid);
+    List<ToxValDb> hazardByDtxsid(String dtxsid) {
+        log.debug("all ToxValDb for dtxsid = {}", dtxsid);
 
-        List<ToxValDbAll> data = repository.findAllByDtxsid(new String[]{dtxsid}, ToxValDbAll.class);
+        List<ToxValDb> data = repository.findAllByDtxsid(dtxsid,  ToxValDb.class);
         log.debug("data size = {}", data.size());
 
         return data;
@@ -63,66 +63,17 @@ public class ToxValDbResource implements ToxValDbApi {
 
     @Override
     public @ResponseBody
-    List<ToxValDbAll> hazardBatch(String[] dtxsids) {
+    List<ToxValDb> hazardBatch(String[] dtxsids) {
 
-        log.debug("all hazard for dtxsid size = {}", dtxsids.length);
+        log.debug("all ToxValDb for dtxsid size = {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
             throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
-        List<ToxValDbAll> data = repository.findAllByDtxsid(dtxsids, ToxValDbAll.class);
+        List<ToxValDb> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, ToxValDb.class);
         log.debug("data size = {}", data.size());
 
         return data;
     }
 
-    @Override
-    public @ResponseBody
-    List<ToxValDbAll> humanHazardByDtxsid(String dtxsid) {
-        log.debug("human hazard for dtxsid = {}", dtxsid);
-
-        List<ToxValDbAll> data = repository.findHumanDataByDtxsid(new String[]{dtxsid}, ToxValDbAll.class);
-        log.debug("data size = {}", data.size());
-
-        return data;
-    }
-
-    @Override
-    public @ResponseBody
-    List<ToxValDbAll> humanBatch(String[] dtxsids) {
-        log.debug("human hazard for dtxsid size = {}", dtxsids.length);
-
-        if(dtxsids.length > batchSize)
-            throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
-
-        List<ToxValDbAll> data = repository.findHumanDataByDtxsid(dtxsids, ToxValDbAll.class);
-        log.debug("data size = {}", data.size());
-
-        return data;
-    }
-
-    @Override
-    public @ResponseBody
-    List<ToxValDbAll> ecoHazardByDtxsid(String dtxsid) {
-        log.debug("eco hazard for dtxsid = {}", dtxsid);
-
-        List<ToxValDbAll> data = repository.findEcoDataByDtxsid(new String[]{dtxsid}, ToxValDbAll.class);
-        log.debug("data size = {}", data.size());
-
-        return data;
-    }
-
-    @Override
-    public @ResponseBody
-    List<ToxValDbAll> ecoBatch( String[] dtxsids){
-        log.debug("eco hazard for dtxsid size = {}", dtxsids.length);
-
-        if(dtxsids.length > batchSize)
-            throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
-
-        List<ToxValDbAll> data = repository.findEcoDataByDtxsid(dtxsids, ToxValDbAll.class);
-        log.debug("data size = {}", data.size());
-
-        return data;
-    }
 }

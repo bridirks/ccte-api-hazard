@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.ToxRefDataAll;
+import gov.epa.ccte.api.hazard.domain.ToxRefData;
 import gov.epa.ccte.api.hazard.repository.ToxRefDataRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,10 +22,10 @@ public class ToxRefDataResource implements ToxRefDataApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefDataAll> toxRefDataByStudyId(Integer studyId) {
+    List<ToxRefData> toxRefDataByStudyId(Integer studyId) {
         log.debug("all Tox Ref Data by Study ID = {}", studyId);
 
-        List<ToxRefDataAll> data = repository.findAllByStudyId(studyId, ToxRefDataAll.class);
+        List<ToxRefData> data = repository.findAllByStudyId(studyId, ToxRefData.class);
 
         return data;
     }
@@ -33,10 +33,10 @@ public class ToxRefDataResource implements ToxRefDataApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefDataAll> toxRefDataByDtxsid(String dtxsid) {
+    List<ToxRefData> toxRefDataByDtxsid(String dtxsid) {
         log.debug("all Tox Ref Data by DTXSID = {}", dtxsid);
 
-        List<ToxRefDataAll> data = repository.findAllByDtxsid(dtxsid, ToxRefDataAll.class);
+        List<ToxRefData> data = repository.findAllByDtxsid(dtxsid, ToxRefData.class);
 
         return data;
     }    
@@ -44,10 +44,10 @@ public class ToxRefDataResource implements ToxRefDataApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefDataAll> toxRefDataByStudyType(String studyType) {
+    List<ToxRefData> toxRefDataByStudyType(String studyType) {
         log.debug("all Tox Ref Data by Study Type = {}", studyType);
 
-        List<ToxRefDataAll> data = repository.findAllByStudyType(studyType, ToxRefDataAll.class);
+        List<ToxRefData> data = repository.findAllByStudyType(studyType, ToxRefData.class);
 
         return data;
     }

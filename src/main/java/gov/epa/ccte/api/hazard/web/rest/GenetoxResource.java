@@ -1,7 +1,7 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.GenetoxDetailAll;
-import gov.epa.ccte.api.hazard.projection.GenetoxSummaryAll;
+import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
+import gov.epa.ccte.api.hazard.domain.GenetoxSummary;
 import gov.epa.ccte.api.hazard.repository.GenetoxDetailRepository;
 import gov.epa.ccte.api.hazard.repository.GenetoxSummaryRepository;
 import gov.epa.ccte.api.hazard.web.rest.error.HigherNumberOfDtxsidException;
@@ -32,23 +32,23 @@ public class GenetoxResource implements GenetoxApi {
 
     @Override
     public @ResponseBody
-    List<GenetoxSummaryAll> genetoxSummaryByDtxsid(String dtxsid) {
+    List<GenetoxSummary> genetoxSummaryByDtxsid(String dtxsid) {
         log.debug("all cancer summary for dtxsid = {}", dtxsid);
 
-        List<GenetoxSummaryAll> data = summaryRepository.findByDtxsid(dtxsid, GenetoxSummaryAll.class);
+        List<GenetoxSummary> data = summaryRepository.findByDtxsid(dtxsid, GenetoxSummary.class);
 
         return data;
     }
 
     @Override
     public @ResponseBody
-    List<GenetoxSummaryAll>batchSearchSummary(String[] dtxsids) {
+    List<GenetoxSummary>batchSearchSummary(String[] dtxsids) {
         log.debug("all cancer summary for dtxsid size = {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
             throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
-        List<GenetoxSummaryAll> data = summaryRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxSummaryAll.class);
+        List<GenetoxSummary> data = summaryRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxSummary.class);
 
         return data;
     }
@@ -59,10 +59,10 @@ public class GenetoxResource implements GenetoxApi {
 
     @Override
     public @ResponseBody
-    List<GenetoxDetailAll> genetoxDetailsByDtxsid(String dtxsid) {
+    List<GenetoxDetail> genetoxDetailsByDtxsid(String dtxsid) {
         log.debug("all cancer summary for dtxsid = {}", dtxsid);
 
-        List<GenetoxDetailAll> data = detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetailAll.class);
+        List<GenetoxDetail> data = detailRepository.findByDtxsidOrderBySourceAsc(dtxsid, GenetoxDetail.class);
 
         return data;
     }
@@ -70,13 +70,13 @@ public class GenetoxResource implements GenetoxApi {
 
     @Override
     public @ResponseBody
-    List<GenetoxDetailAll> batchSearch(String[] dtxsids) {
+    List<GenetoxDetail> batchSearch(String[] dtxsids) {
         log.debug("all cancer summary for dtxsid size= {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
             throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
-        List<GenetoxDetailAll> data = detailRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxDetailAll.class);
+        List<GenetoxDetail> data = detailRepository.findByDtxsidInOrderByDtxsidAsc(dtxsids, GenetoxDetail.class);
 
         return data;
     }

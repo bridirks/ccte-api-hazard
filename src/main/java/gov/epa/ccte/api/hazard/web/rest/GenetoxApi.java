@@ -1,7 +1,5 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.GenetoxDetailAll;
-import gov.epa.ccte.api.hazard.projection.GenetoxSummaryAll;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -16,6 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
+import gov.epa.ccte.api.hazard.domain.GenetoxSummary;
 
 import java.util.List;
 
@@ -36,11 +37,11 @@ public interface GenetoxApi {
     @Operation(summary = "Get summary data by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {GenetoxSummaryAll.class})))
+                    schema = @Schema(oneOf = {GenetoxSummary.class})))
     })
     @GetMapping(value = "/summary/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List<GenetoxSummaryAll> genetoxSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
+    List<GenetoxSummary> genetoxSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
 
     /**
      * {@code POST  hazard/genetox/summary/search/by-dtxsid/{dtxsid} : get list of genetox summary data for batch "dtxsid".
@@ -50,7 +51,7 @@ public interface GenetoxApi {
     @Operation(summary = "Get summary data by batch of dtxsid(s).", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {GenetoxSummaryAll.class}))),
+                    schema = @Schema(oneOf = {GenetoxSummary.class}))),
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
                             examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
@@ -58,7 +59,7 @@ public interface GenetoxApi {
     })
     @PostMapping(value = "/summary/search/by-dtxsid/")
     @ResponseBody
-    List<GenetoxSummaryAll> batchSearchSummary(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<GenetoxSummary> batchSearchSummary(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                                @RequestBody String[] dtxsids);
@@ -71,11 +72,11 @@ public interface GenetoxApi {
     @Operation(summary = "Get detail data by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {GenetoxDetailAll.class})))
+                    schema = @Schema(oneOf = {GenetoxDetail.class})))
     })
     @GetMapping(value = "/details/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List<GenetoxDetailAll> genetoxDetailsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
+    List<GenetoxDetail> genetoxDetailsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
 
     /**
      * {@code POST  hazard/genetox-details/search/by-dtxsid/{dtxsid} : get list of genetox detail data for batch "dtxsid".
@@ -85,7 +86,7 @@ public interface GenetoxApi {
     @Operation(summary = "Get detail data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {GenetoxDetailAll.class}))),
+                    schema = @Schema(oneOf = {GenetoxDetail.class}))),
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
                             examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
@@ -93,7 +94,7 @@ public interface GenetoxApi {
     })
     @PostMapping(value = "/details/search/by-dtxsid/")
     @ResponseBody
-    List<GenetoxDetailAll> batchSearch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<GenetoxDetail> batchSearch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                        @RequestBody String[] dtxsids);

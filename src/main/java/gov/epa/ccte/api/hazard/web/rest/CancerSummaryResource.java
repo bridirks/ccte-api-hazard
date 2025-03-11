@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.CancerSummaryAll;
+import gov.epa.ccte.api.hazard.domain.CancerSummary;
 import gov.epa.ccte.api.hazard.repository.CancerSummaryRepository;
 import gov.epa.ccte.api.hazard.web.rest.error.HigherNumberOfDtxsidException;
 import lombok.extern.slf4j.Slf4j;
@@ -27,23 +27,23 @@ public class CancerSummaryResource implements CancerSummaryApi {
 
     @Override
     public @ResponseBody
-    List<CancerSummaryAll> cancerSummaryByDtxsid(String dtxsid) {
+    List<CancerSummary> cancerSummaryByDtxsid(String dtxsid) {
         log.debug("all cancer summary for dtxsid = {}", dtxsid);
 
-        List<CancerSummaryAll> data = repository.findAllByDtxsid(dtxsid, CancerSummaryAll.class);
+        List<CancerSummary> data = repository.findAllByDtxsid(dtxsid, CancerSummary.class);
 
         return data;
     }
 
     @Override
     public @ResponseBody
-    List<CancerSummaryAll> cancerSummaryBatch(String[] dtxsids) {
+    List<CancerSummary> cancerSummaryBatch(String[] dtxsids) {
         log.debug("all cancer summary for dtxsid size = {}", dtxsids.length);
 
         if(dtxsids.length > batchSize)
             throw new HigherNumberOfDtxsidException(dtxsids.length, batchSize);
 
-        List<CancerSummaryAll> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, CancerSummaryAll.class);
+        List<CancerSummary> data = repository.findByDtxsidInOrderByDtxsidAsc(dtxsids, CancerSummary.class);
 
         return data;
     }

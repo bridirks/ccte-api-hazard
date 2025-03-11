@@ -1,6 +1,6 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.ToxRefEffectsAll;
+import gov.epa.ccte.api.hazard.domain.ToxRefEffects;
 import gov.epa.ccte.api.hazard.repository.ToxRefEffectsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,10 +24,10 @@ public class ToxRefEffectsResource implements ToxRefEffectsApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefEffectsAll> toxRefEffectsByStudyId(Integer studyId) {
+    List<ToxRefEffects> toxRefEffectsByStudyId(Integer studyId) {
         log.debug("all Tox Ref Effects by Study ID = {}", studyId);
 
-        List<ToxRefEffectsAll> data = repository.findAllByStudyId(studyId, ToxRefEffectsAll.class);
+        List<ToxRefEffects> data = repository.findAllByStudyId(studyId, ToxRefEffects.class);
 
         return data;
     }
@@ -35,10 +35,10 @@ public class ToxRefEffectsResource implements ToxRefEffectsApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefEffectsAll> toxRefEffectsByDtxsid(String dtxsid) {
+    List<ToxRefEffects> toxRefEffectsByDtxsid(String dtxsid) {
         log.debug("all Tox Ref Effects by DTXSID = {}", dtxsid);
 
-        List<ToxRefEffectsAll> data = repository.findAllByDtxsid(dtxsid, ToxRefEffectsAll.class);
+        List<ToxRefEffects> data = repository.findAllByDtxsid(dtxsid, ToxRefEffects.class);
 
         return data;
     }    
@@ -46,10 +46,10 @@ public class ToxRefEffectsResource implements ToxRefEffectsApi {
 
     @Override
     public @ResponseBody
-    List<ToxRefEffectsAll> toxRefEffectsByStudyType(String studyType) {
+    List<ToxRefEffects> toxRefEffectsByStudyType(String studyType) {
         log.debug("all Tox Ref Effects by Study Type = {}", studyType);
 
-        List<ToxRefEffectsAll> data = repository.findAllByStudyType(studyType, ToxRefEffectsAll.class);
+        List<ToxRefEffects> data = repository.findAllByStudyType(studyType, ToxRefEffects.class);
 
         return data;
     }

@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import gov.epa.ccte.api.hazard.projection.SkinEyeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -12,6 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import gov.epa.ccte.api.hazard.domain.SkinEye;
 
 import javax.sql.DataSource;
 
@@ -54,9 +55,9 @@ class SkinEyeRepositoryTest {
     }
 
     @Test
-    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID00100670", SkinEyeAll.class)).isNotNull(); }
+    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID00100670", SkinEye.class)).isNotNull(); }
 
     @Test
-    void findByDtxsidInOrderByDtxsidAsc() { assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00100670,DTXSID00100498"}, SkinEyeAll.class)).isNotNull(); }
+    void findByDtxsidInOrderByDtxsidAsc() { assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00100670,DTXSID00100498"}, SkinEye.class)).isNotNull(); }
 
 }

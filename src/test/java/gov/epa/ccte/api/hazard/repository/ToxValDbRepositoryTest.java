@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.repository;
 
-import gov.epa.ccte.api.hazard.projection.ToxValDbAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -12,6 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import gov.epa.ccte.api.hazard.domain.ToxValDb;
 
 import javax.sql.DataSource;
 
@@ -52,11 +53,6 @@ class ToxValDbRepositoryTest {
     void testDataLoaded() {assertThat(repository.findAll().size()).isEqualTo(29);}
 
     @Test
-    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid(new String[] {"DTXSID0029054"}, ToxValDbAll.class)).isNotNull(); }
+    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID0029054",  ToxValDb.class)).isNotNull(); }
 
-    @Test
-    void findEcoDataByDtxsid() { assertThat(repository.findEcoDataByDtxsid(new String[] {"DTXSID0029054"}, ToxValDbAll.class)).isNotNull(); }
-
-    @Test
-    void findHumanDataByDtxsid() { assertThat(repository.findHumanDataByDtxsid(new String[] {"DTXSID0029054"}, ToxValDbAll.class)).isNotNull(); }
 }

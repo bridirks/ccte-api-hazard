@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.ToxRefEffectsAll;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,6 +10,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import gov.epa.ccte.api.hazard.domain.ToxRefEffects;
 
 import java.util.List;
 
@@ -29,11 +30,11 @@ public interface ToxRefEffectsApi {
     @Operation(summary = "Get data by study id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefEffectsAll.class})))
+                    schema = @Schema(oneOf = {ToxRefEffects.class})))
     })
     @GetMapping(value = "/hazard/toxref/effects/search/by-study-id/{studyId}")
     @ResponseBody
-    List toxRefEffectsByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId);
+    List<ToxRefEffects> toxRefEffectsByStudyId(@Parameter(required = true, description = "Study ID", example = "63") @PathVariable("studyId") Integer studyId);
 
 
     /**
@@ -44,11 +45,11 @@ public interface ToxRefEffectsApi {
     @Operation(summary = "Get data by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefEffectsAll.class})))
+                    schema = @Schema(oneOf = {ToxRefEffects.class})))
     })
     @GetMapping(value = "/hazard/toxref/effects/search/by-dtxsid/{dtxsid}")
     @ResponseBody
-    List toxRefEffectsByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid);
+    List<ToxRefEffects> toxRefEffectsByDtxsid(@Parameter(required = true, description = "dtxsid", example = "DTXSID1037806") @PathVariable("dtxsid") String dtxsid);
 
 
     /**
@@ -59,11 +60,11 @@ public interface ToxRefEffectsApi {
     @Operation(summary = "Get data by study type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {ToxRefEffectsAll.class})))
+                    schema = @Schema(oneOf = {ToxRefEffects.class})))
     })
     @GetMapping(value = "/hazard/toxref/effects/search/by-study-type/{studyType}")
     @ResponseBody
-    List toxRefEffectsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
+    List<ToxRefEffects> toxRefEffectsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
 
 
 }

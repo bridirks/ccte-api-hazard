@@ -58,7 +58,7 @@ public class HazardApplication {
 		log.info("*** Application is started. ***");
 
 		SpringApplication app = new SpringApplication(HazardApplication.class);
-		DefaultProfileUtil.addDefaultProfile(app); // dev profile is default
+		DefaultProfileUtil.addDefaultProfile(app); // local profile is default
 		ConfigurableApplicationContext ctx = app.run(args);
 		Environment env = ctx.getEnvironment();
 

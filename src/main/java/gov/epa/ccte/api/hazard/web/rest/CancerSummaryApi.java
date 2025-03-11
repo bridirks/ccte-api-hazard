@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.web.rest;
 
-import gov.epa.ccte.api.hazard.projection.CancerSummaryAll;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -15,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import gov.epa.ccte.api.hazard.domain.CancerSummary;
 
 import java.util.List;
 
@@ -36,10 +37,10 @@ public interface CancerSummaryApi {
     @GetMapping(value = "/search/by-dtxsid/{dtxsid}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {CancerSummaryAll.class})))
+                    schema = @Schema(oneOf = {CancerSummary.class})))
     })
     @ResponseBody
-    List<CancerSummaryAll> cancerSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
+    List<CancerSummary> cancerSummaryByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID0021125") @PathVariable("dtxsid") String dtxsid);
 
     /**
      * {@code POST  hazard/cancer-summary/search/by-dtxsid/ : get list of cancer summary data for batch "dtxsid".
@@ -49,7 +50,7 @@ public interface CancerSummaryApi {
     @Operation(summary = "Get data by batch of dtxsid(s)", description = "Note: Maximum ${application.batch-size} DTXSIDs per request")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfull", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = {CancerSummaryAll.class}))),
+                    schema = @Schema(oneOf = {CancerSummary.class}))),
             @ApiResponse(responseCode = "400", description = "When user has submitted more then allowed number (${application.batch-size}) of DTXSID(s).",
                     content = @Content(mediaType = "application/json",
                             examples = {@ExampleObject(name = "", value = "{\"title\":\"Validation Error\",\"status\":400,\"detail\":\"System supports only '200' dtxsid at one time, '202' are submitted.\"}", description = "Validation error for more then allowed number of dtxsid(s).")},
@@ -57,7 +58,7 @@ public interface CancerSummaryApi {
     })
     @PostMapping(value = "/search/by-dtxsid/")
     @ResponseBody
-    List<CancerSummaryAll> cancerSummaryBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
+    List<CancerSummary> cancerSummaryBatch(@io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, description = "JSON array of DSSTox Substance Identifier",
             content = {@Content(array = @ArraySchema(schema = @Schema(implementation = String.class)),
                     examples = {@ExampleObject("\"[\\\"DTXSID7020182\\\",\\\"DTXSID9020112\\\"]\"")})})
                                               @RequestBody String[] dtxsids);
