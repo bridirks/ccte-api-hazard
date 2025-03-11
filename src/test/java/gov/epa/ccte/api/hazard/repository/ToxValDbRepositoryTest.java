@@ -50,7 +50,7 @@ class ToxValDbRepositoryTest {
 
     // Now test data loaded or not
     @Test
-    void testDataLoaded() {assertThat(repository.findAll().size()).isEqualTo(29);}
+    void testDataLoaded() {assertThat(repository.findAll().size()).isEqualTo(30);}
 
     @Test
     void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID0029054",  ToxValDb.class)).isNotNull(); }

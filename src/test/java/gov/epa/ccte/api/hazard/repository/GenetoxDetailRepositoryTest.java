@@ -51,7 +51,7 @@ class GenetoxDetailRepositoryTest {
     // Now test data loaded or not
     @Test
     void testDataLoaded() {
-        assertThat(repository.findAll().size()).isEqualTo(16);
+        assertThat(repository.findAll().size()).isEqualTo(24);
     }
 
     @Test

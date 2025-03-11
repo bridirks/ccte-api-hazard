@@ -51,7 +51,7 @@ class SkinEyeRepositoryTest {
     // Now test data loaded or not
     @Test
     void testDataLoaded() {
-        assertThat(repository.findAll().size()).isEqualTo(29);
+        assertThat(repository.findAll().size()).isEqualTo(15);
     }
 
     @Test

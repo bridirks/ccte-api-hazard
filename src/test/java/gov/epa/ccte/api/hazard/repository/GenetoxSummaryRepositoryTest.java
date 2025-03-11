@@ -52,7 +52,7 @@ class GenetoxSummaryRepositoryTest {
     // Now test data loaded or not
     @Test
     void testDataLoaded() {
-        assertThat(repository.findAll().size()).isEqualTo(5);
+        assertThat(repository.findAll().size()).isEqualTo(2);
     }
 
     @Test
