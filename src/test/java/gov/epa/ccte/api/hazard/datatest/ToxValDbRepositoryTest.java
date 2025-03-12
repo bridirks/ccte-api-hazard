@@ -1,32 +1,28 @@
-package gov.epa.ccte.api.hazard.repository;
+package gov.epa.ccte.api.hazard.datatest;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import gov.epa.ccte.api.hazard.domain.ToxValDb;
+import gov.epa.ccte.api.hazard.repository.ToxValDbRepository;
 
 import javax.sql.DataSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Testcontainers
+
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
 class ToxValDbRepositoryTest {
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> pgsqldb = new PostgreSQLContainer<>("postgres:13-alpine");
+
 
     @Autowired
     private DataSource dataSource;
@@ -34,12 +30,11 @@ class ToxValDbRepositoryTest {
     @Autowired private TestEntityManager entityManager;
     @Autowired private ToxValDbRepository repository;
 
-    @Test
-    void connectionEstablished(){
-        assertThat(pgsqldb.isCreated()).isTrue();
-        assertThat(pgsqldb.isRunning()).isTrue();
+    @AfterEach
+    void setup() {
+    	repository.deleteAll(); // Clean up after each test
     }
-
+    
     @Test
     void injectedComponentsAreNotNull() {
         assertThat(dataSource).isNotNull();
