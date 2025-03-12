@@ -46,12 +46,12 @@ class CancerSummaryRepositoryTest {
     void testDataLoaded() {
         assertThat(repository.findAll().size()).isEqualTo(8);
     }
-	@Test
-	void testFindAllByDtxsid() {
-		assertThat(repository.findAllByDtxsid("DTXSID0020319", CancerSummary.class)).isNotNull();	}
+    @Test
+    void testFindAllByDtxsid() {
+	assertThat(repository.findAllByDtxsid("DTXSID0020319", CancerSummary.class)).isNotNull();	}
 
-	@Test
-	void testFindByDtxsidInOrderByDtxsidAsc() {
-		assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID0020319,DTXSID0020076"}, CancerSummary.class)).isNotNull();	}
+    @Test
+    void testFindByDtxsidInOrderByDtxsidAsc() {
+	assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID0020319,DTXSID0020076"}, CancerSummary.class)).isNotNull();	}
 
 }
