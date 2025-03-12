@@ -1,45 +1,33 @@
-package gov.epa.ccte.api.hazard.repository;
+package gov.epa.ccte.api.hazard.datatest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-import gov.epa.ccte.api.hazard.domain.ToxValDb;
+import gov.epa.ccte.api.hazard.domain.GenetoxSummary;
+import gov.epa.ccte.api.hazard.repository.GenetoxSummaryRepository;
 
 import javax.sql.DataSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Testcontainers
+
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
-class ToxValDbRepositoryTest {
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> pgsqldb = new PostgreSQLContainer<>("postgres:13-alpine");
+class GenetoxSummaryRepositoryTest {
 
     @Autowired
     private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private TestEntityManager entityManager;
-    @Autowired private ToxValDbRepository repository;
-
-    @Test
-    void connectionEstablished(){
-        assertThat(pgsqldb.isCreated()).isTrue();
-        assertThat(pgsqldb.isRunning()).isTrue();
-    }
-
+    @Autowired private GenetoxSummaryRepository repository;
+    
     @Test
     void injectedComponentsAreNotNull() {
         assertThat(dataSource).isNotNull();
@@ -50,9 +38,14 @@ class ToxValDbRepositoryTest {
 
     // Now test data loaded or not
     @Test
-    void testDataLoaded() {assertThat(repository.findAll().size()).isEqualTo(29);}
+    void testDataLoaded() {
+        assertThat(repository.findAll().size()).isEqualTo(2);
+    }
 
     @Test
-    void findAllByDtxsid() { assertThat(repository.findAllByDtxsid("DTXSID0029054",  ToxValDb.class)).isNotNull(); }
+    void findByDtxsidInOrderByDtxsidAsc() { assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00108550,DTXSID0027775,DTXSID00109168"}, GenetoxSummary.class)).isNotNull(); }
+
+    @Test
+    void findByDtxsid() { assertThat(repository.findByDtxsid("DTXSID0020319", GenetoxSummary.class)).isNotNull(); }
 
 }

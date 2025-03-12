@@ -1,45 +1,33 @@
-package gov.epa.ccte.api.hazard.repository;
+package gov.epa.ccte.api.hazard.datatest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-import gov.epa.ccte.api.hazard.domain.GenetoxSummary;
+import gov.epa.ccte.api.hazard.domain.GenetoxDetail;
+import gov.epa.ccte.api.hazard.repository.GenetoxDetailRepository;
 
 import javax.sql.DataSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@Testcontainers
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
-class GenetoxSummaryRepositoryTest {
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> pgsqldb = new PostgreSQLContainer<>("postgres:13-alpine");
+class GenetoxDetailRepositoryTest {
+
 
     @Autowired
     private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private TestEntityManager entityManager;
-    @Autowired private GenetoxSummaryRepository repository;
-
-    @Test
-    void connectionEstablished(){
-        assertThat(pgsqldb.isCreated()).isTrue();
-        assertThat(pgsqldb.isRunning()).isTrue();
-    }
+    @Autowired private GenetoxDetailRepository repository;
 
     @Test
     void injectedComponentsAreNotNull() {
@@ -52,13 +40,13 @@ class GenetoxSummaryRepositoryTest {
     // Now test data loaded or not
     @Test
     void testDataLoaded() {
-        assertThat(repository.findAll().size()).isEqualTo(5);
+        assertThat(repository.findAll().size()).isEqualTo(24);
     }
 
     @Test
-    void findByDtxsidInOrderByDtxsidAsc() { assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00108550,DTXSID0027775,DTXSID00109168"}, GenetoxSummary.class)).isNotNull(); }
+    void findByDtxsidOrderBySourceAsc() {assertThat(repository.findByDtxsidOrderBySourceAsc("DTXSID00100670", GenetoxDetail.class)).isNotNull();}
 
     @Test
-    void findByDtxsid() { assertThat(repository.findByDtxsid("DTXSID0020319", GenetoxSummary.class)).isNotNull(); }
+    void findByDtxsidInOrderByDtxsidAsc() {assertThat(repository.findByDtxsidInOrderByDtxsidAsc(new String[]{"DTXSID00100670,DTXSID00178076"}, GenetoxDetail.class)).isNotNull();}
 
 }
