@@ -26,7 +26,7 @@ class CancerSummaryResourceTest {
                 .expectHeader().contentType(APPLICATION_JSON);
 	}
     
-    // Test the endpoint for getting cancer summary by dtxsid
+    // Test the endpoint for getting cancer summary by bacth of dtxsids
     @Test
     void testCancerSummaryByBatchDtxsidForPositiveResponse() {
     	val requestBody = "[" + "\"DTXSID7020182\"," + "\"DTXSID9020112\"]";
