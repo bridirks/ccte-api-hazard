@@ -1,6 +1,5 @@
 package gov.epa.ccte.api.hazard.datatest;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -29,11 +28,6 @@ class ToxValDbRepositoryTest {
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private TestEntityManager entityManager;
     @Autowired private ToxValDbRepository repository;
-
-    @AfterEach
-    void setup() {
-    	repository.deleteAll(); // Clean up after each test
-    }
     
     @Test
     void injectedComponentsAreNotNull() {
