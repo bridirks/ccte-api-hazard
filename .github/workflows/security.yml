@@ -27,6 +27,7 @@ jobs:
           dockerfile: Dockerfile
           output_path: ./output/hazard-report.html
           cleanup_path: /data/watchtower/ctx-API/container-results/api-hazard/hazard-report.html
+          watchtower_path: /data/watchtower/ctx-API/container-results/api-hazard/hazard-report.html
 
   trufflehog:
     runs-on: ubuntu-latest
