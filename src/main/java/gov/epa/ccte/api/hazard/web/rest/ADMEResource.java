@@ -41,5 +41,4 @@ public class ADMEResource implements ADMEApi{
             return List.of(); 
         }
     }
-
 }

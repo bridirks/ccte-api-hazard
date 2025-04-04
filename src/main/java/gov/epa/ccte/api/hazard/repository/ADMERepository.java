@@ -50,5 +50,6 @@ public interface ADMERepository extends JpaRepository<ADME, Integer>{
 			WHERE
 			    adme.dtxsid = :dtxsid
 		""", nativeQuery = true)
-List<CcdADME> findByDtxsidWithLabelColumn(@Param("dtxsid")String dtxsid);
+    	List<CcdADME> findByDtxsidWithLabelColumn(@Param("dtxsid")String dtxsid);
+    
 }

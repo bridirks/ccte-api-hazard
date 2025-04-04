@@ -27,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
         description = "API endpoints for collecting adme - ivive data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
 public interface ADMEApi {
+	
     /**
      * {@code GET  hazard/adme-ivive/search/by-dtxsid/{dtxsid} : get list of adme - ivive data for the "dtxsid".
      * @param dtxsid the matching dtxsid of the adme - ivive data to retrieve.

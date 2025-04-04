@@ -12,4 +12,5 @@ public interface CcdADME {
 	String getPercentile();
 	String getSpecies();
 	String getDataSourceSpecies();
+	
 }

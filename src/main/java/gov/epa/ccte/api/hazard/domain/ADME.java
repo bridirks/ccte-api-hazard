@@ -52,4 +52,5 @@ public class ADME {
     
     @Column(name = "data_source_species")
     private String dataSourceSpecies;
+    
     }
