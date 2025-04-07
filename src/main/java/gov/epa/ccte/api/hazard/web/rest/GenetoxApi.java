@@ -84,7 +84,7 @@ public interface GenetoxApi {
     List<?> getGenetoxDetailsByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
     									@PathVariable("dtxsid") String dtxsid,
     									@Parameter(description = "Specifies if projection is used. Option: ccd-genetox-details, " +
-    											"If omitted, the default CCDBiomonitoring data is returned.")
+    											"If omitted, the default GenetoxDetail data is returned.")
     									@RequestParam(value = "projection", required = false) String projection);
 
     /**
