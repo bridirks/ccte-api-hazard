@@ -11,4 +11,5 @@ public interface CcdGenetoxDetail {
 	String getStrain();
 	String getAssayResult();
 	Integer getYear();
+
 }
