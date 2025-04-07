@@ -27,6 +27,7 @@ public interface GenetoxDetailRepository extends JpaRepository<GenetoxDetail, In
 			    genetox.metabolic_activation AS metabolicActivation,
 			    genetox.species,
 			    genetox.strain,
+			    genetox.year,
 			    genetox.assay_result AS assayResult,
                 CONCAT(CONCAT(genetox.assay_type, ' | '), genetox.assay_type_standard) AS assayType
 			FROM
