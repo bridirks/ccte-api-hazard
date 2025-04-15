@@ -3,6 +3,9 @@
 ## Overview
 The ccte-api-hazard is a RESTful API designed to manage and provide hazard data. It interacts with a database and offers various endpoints for hazard-related operations.
 
+## Available Data
+Data underlying the Hazard API comes from the Toxicity Value Database (ToxValDB). This resource is a compilation of information sourced from multiple public datasets, databases and open literature and includes data on thousands of chemicals from tens of thousands of records, with an emphasis on quantitative estimates of relevant points-of-departure from in vivo toxicology studies, such as no- and low-observable adverse effect levels, screening levels, reference doses, tolerable daily intake, etc.
+
 ## Technologies Used
 - **Java**: Programming language used for the development of the application.
 - **Spring Boot**: Framework used to create stand-alone, production-grade Spring-based applications.
@@ -52,4 +55,7 @@ src/
 Contributions are welcome! Please read the `CONTRIBUTING.md` file for guidelines.
 
 ## Contact
-For any inquiries, please contact the project maintainers.
+ For any inquiries, please contact the project maintainer. **[Rashid, Asif](https://github.com/asif-rashid)** , **[Dirks, Brianna](https://github.com/bridirks)**, **[Feshuk, Madison](https://github.com/madison-feshuk)**
+
+## Disclaimer
+The United States Environmental Protection Agency (EPA) GitHub project code is provided on an "as is" basis and the user assumes responsibility for its use. EPA has relinquished control of the information and no longer has responsibility to protect the integrity, confidentiality, or availability of the information. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by EPA. The EPA seal and logo shall not be used in any manner to imply endorsement of any commercial product or activity by EPA or the United States Government. 
