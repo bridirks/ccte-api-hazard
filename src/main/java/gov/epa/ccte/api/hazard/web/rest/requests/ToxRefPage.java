@@ -11,7 +11,7 @@ import java.util.List;
 public class ToxRefPage {
 	private String studyType;
     private Long totalRecords;
-    private Integer numberOfRecordsOnPage;
+    private Integer recordsOnPage;
     private Integer pageNumber;
     private Integer totalPages;
     private List<?> data;
