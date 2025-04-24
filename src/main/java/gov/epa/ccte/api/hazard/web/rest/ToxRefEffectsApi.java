@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import gov.epa.ccte.api.hazard.domain.ToxRefEffects;
+import gov.epa.ccte.api.hazard.web.rest.requests.ToxRefPage;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public interface ToxRefEffectsApi {
     })
     @GetMapping(value = "/hazard/toxref/effects/search/by-study-type/{studyType}")
     @ResponseBody
-    List<ToxRefEffects> toxRefEffectsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType);
-
+    ToxRefPage toxRefEffectsByStudyType(@Parameter(required = true, description = "Study Type", example = "DEV") @PathVariable("studyType") String studyType,
+										@RequestParam(required = false, value = "pageNumber", defaultValue = "1") Integer pageNumber);
 
 }
