@@ -25,7 +25,7 @@ import java.util.List;
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.GenetoxDetail}s. and
  */
 
-@Tag(name = "Genetox Resource",
+@Tag(name = "ToxValDb Genetox Resource",
         description = "API endpoints for collecting Genetox data.")
 @SecurityRequirement(name = "api_key")
 @RequestMapping( value = "hazard/genetox", produces = MediaType.APPLICATION_JSON_VALUE)

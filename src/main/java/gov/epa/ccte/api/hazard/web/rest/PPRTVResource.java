@@ -13,11 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class PPRTVChemicalsResource implements PPRTVChemicalsApi{
+public class PPRTVResource implements PPRTVApi{
 
     private final PPRTVChemicalsRepository repository;
     
-    public PPRTVChemicalsResource(PPRTVChemicalsRepository repository) {
+    public PPRTVResource(PPRTVChemicalsRepository repository) {
         this.repository = repository;
     }
     

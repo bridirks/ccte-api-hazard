@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefData}s.
  */
-@Tag(name = "Tox Ref Data Resource",
+@Tag(name = "ToxRefDB Data Resource",
         description = "API endpoints for collecting ToxRefDB data.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefDataApi {

@@ -20,10 +20,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.PPRTVChemicals}s.
  */
-@Tag(name = "PPRTV Chemical Resource",
+@Tag(name = "PPRTV Resource",
         description = "API endpoints for collecting pprtv chemical data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
-public interface PPRTVChemicalsApi {
+public interface PPRTVApi {
     /**
      * {@code GET  hazard/pprtv/search/by-dtxsid/{dtxsid} : get list of pprtv chemical data for the "dtxsid".
      * @param dtxsid the matching dtxsid of the pprtv chemical data to retrieve.
