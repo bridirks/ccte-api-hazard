@@ -42,11 +42,11 @@ public interface ADMEApi {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
                     schema = @Schema(oneOf = { ADME.class, CcdADME.class}))),
     })
-    @RequestMapping(value = "hazard/adme-iviv/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "hazard/adme-ivive/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     List<?> admeDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
     						@PathVariable("dtxsid") String dtxsid,
-    						@Parameter(description = "Specifies if projection is used. Option: ccd-biomonitoring, " +
-    								"If omitted, the default CCDBiomonitoring data is returned.")
+    						@Parameter(description = "Specifies if projection is used. Option: ccd-adme-data, " +
+    								"If omitted, the default ADME-IVIVE data is returned.")
     						@RequestParam(value = "projection", required = false) String projection);
     
 }

@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ToxRefObs}s.
  */
-@Tag(name = "Tox Ref Observation Resource",
-        description = "API endpoints for collecting ToxRefDB data.")
+@Tag(name = "ToxRefDB Observation Resource",
+        description = "API endpoints for collecting ToxRefDB observation data.")
 @SecurityRequirement(name = "api_key")
 public interface ToxRefObsApi {
     /**
