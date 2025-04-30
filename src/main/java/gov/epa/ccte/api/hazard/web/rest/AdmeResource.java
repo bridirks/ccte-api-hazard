@@ -5,17 +5,17 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.epa.ccte.api.hazard.domain.ADME;
-import gov.epa.ccte.api.hazard.repository.ADMERepository;
+import gov.epa.ccte.api.hazard.domain.Adme;
+import gov.epa.ccte.api.hazard.repository.AdmeRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class ADMEResource implements ADMEApi{
-    private final ADMERepository repository;
+public class AdmeResource implements AdmeApi{
+    private final AdmeRepository repository;
     
-    public ADMEResource(ADMERepository repository) {
+    public AdmeResource(AdmeRepository repository) {
         this.repository = repository;
     }
     
@@ -24,13 +24,13 @@ public class ADMEResource implements ADMEApi{
         log.debug("all ADME - IVIVE data = {}", dtxsid);
 
         if (projection == null || projection.isEmpty()) {
-            List<ADME> result = repository.findByDtxsid(dtxsid, ADME.class);
+            List<Adme> result = repository.findByDtxsid(dtxsid, Adme.class);
             return result != null ? List.of(result) : List.of(); 
         }
 
         Object result = switch (projection) {
         	case "ccd-adme-data" -> repository.findByDtxsidWithLabelColumn(dtxsid);
-        	default -> repository.findByDtxsid(dtxsid, ADME.class);
+        	default -> repository.findByDtxsid(dtxsid, Adme.class);
         };
 
         if (result instanceof List<?>) {

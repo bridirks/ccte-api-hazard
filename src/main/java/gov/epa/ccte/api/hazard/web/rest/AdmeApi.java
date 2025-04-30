@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import gov.epa.ccte.api.hazard.domain.ADME;
+import gov.epa.ccte.api.hazard.domain.Adme;
 import gov.epa.ccte.api.hazard.projection.CcdADME;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,12 +21,12 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
- * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ADME}s.
+ * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.Adme}s.
  */
 @Tag(name = "ADME - IVIVE Resource",
         description = "API endpoints for collecting adme - ivive data for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
-public interface ADMEApi {
+public interface AdmeApi {
 	
     /**
      * {@code GET  hazard/adme-ivive/search/by-dtxsid/{dtxsid} : get list of adme - ivive data for the "dtxsid".
@@ -40,7 +40,7 @@ public interface ADMEApi {
                    "If no projection is specified, the default ADME data will be returned")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = { ADME.class, CcdADME.class}))),
+                    schema = @Schema(oneOf = { Adme.class, CcdADME.class}))),
     })
     @RequestMapping(value = "hazard/adme-ivive/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     List<?> admeDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 

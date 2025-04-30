@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Schema(description = "Integrated Risk Information System (IRIS): EPA's IRIS Program identifies and characterizes the health hazards of chemicals found in the environment. Each IRIS assessment can cover a chemical, a group of related chemicals, or a complex mixture. IRIS assessments are an important source of toxicity information used by EPA, state and local health agencies, other federal agencies, and international health organizations.")
 @Table(name = "iris_data", schema = "iris")
-public class IRIS {
+public class Iris {
 
 	@Id
     @NotNull
