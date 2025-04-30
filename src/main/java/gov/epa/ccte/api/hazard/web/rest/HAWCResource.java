@@ -5,26 +5,26 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.epa.ccte.api.hazard.domain.HAWC;
-import gov.epa.ccte.api.hazard.repository.HAWCRepository;
+import gov.epa.ccte.api.hazard.domain.Hawc;
+import gov.epa.ccte.api.hazard.repository.HawcRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class HAWCResource implements HAWCApi{
+public class HawcResource implements HawcApi{
 
-    private final HAWCRepository repository;
+    private final HawcRepository repository;
     
-    public HAWCResource(HAWCRepository repository) {
+    public HawcResource(HAWCRepository repository) {
         this.repository = repository;
     }
     
     @Override
-    public List<HAWC> hawcDataByDtxsid(String dtxsid) {
+    public List<Hawc> hawcDataByDtxsid(String dtxsid) {
         log.debug("CCD - EPA HAWC link mapper for dtxsid = {}", dtxsid);
         
-        List<HAWC> data = repository.findByDtxsid(dtxsid);
+        List<Hawc> data = repository.findByDtxsid(dtxsid);
         
         return data;
     }
