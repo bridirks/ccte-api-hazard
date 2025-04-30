@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
- * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.ADME}s.
+ * REST controller for getting the {@link gov.epa.ccte.api.hazard.domain.Hawc}s.
  */
 @Tag(name = "HAWC Resource",
         description = "API endpoints for collecting CCD - EPA HAWC link mapper for specified chemical identifier (DTXSID).")
@@ -34,7 +34,7 @@ public interface HawcApi {
     @Operation(summary = "Get CCD - EPA HAWC link mapper by dtxsid")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-                    schema = @Schema(oneOf = { HAWC.class}))),
+                    schema = @Schema(oneOf = { Hawc.class}))),
     })
     @RequestMapping(value = "hazard/hawc/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     List<Hawc> hawcDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
