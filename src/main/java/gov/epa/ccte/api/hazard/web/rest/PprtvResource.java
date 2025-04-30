@@ -6,27 +6,27 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.epa.ccte.api.hazard.domain.PPRTVChemicals;
-import gov.epa.ccte.api.hazard.repository.PPRTVChemicalsRepository;
+import gov.epa.ccte.api.hazard.domain.Pprtv;
+import gov.epa.ccte.api.hazard.repository.PprtvRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class PPRTVResource implements PPRTVApi{
+public class PprtvResource implements PprtvApi{
 
-    private final PPRTVChemicalsRepository repository;
+    private final PprtvRepository repository;
     
-    public PPRTVResource(PPRTVChemicalsRepository repository) {
+    public PprtvResource(PprtvRepository repository) {
         this.repository = repository;
     }
     
     @Override
     public @ResponseBody
-    List<PPRTVChemicals> pprtvChemicalsByDtxsid(String dtxsid) {
+    List<Pprtv> pprtvChemicalsByDtxsid(String dtxsid) {
         log.debug("all PPRTV Chemical data = {}", dtxsid);
 
-        List<PPRTVChemicals> data = repository.findAllByDtxsid(dtxsid);
+        List<Pprtv> data = repository.findAllByDtxsid(dtxsid);
 
         return data;
     }

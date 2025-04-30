@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "mv_pprtv_chemicals", schema = "pprtv")
-public class PPRTVChemicals {
+public class Pprtv {
     @Id
     @NotNull
     @Column(name = "id")

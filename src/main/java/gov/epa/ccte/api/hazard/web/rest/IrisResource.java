@@ -5,26 +5,26 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.epa.ccte.api.hazard.domain.IRIS;
-import gov.epa.ccte.api.hazard.repository.IRISRepository;
+import gov.epa.ccte.api.hazard.domain.Iris;
+import gov.epa.ccte.api.hazard.repository.IrisRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-public class IRISResource implements IRISApi{
+public class IrisResource implements IrisApi{
 
-    private final IRISRepository repository;
+    private final IrisRepository repository;
     
-    public IRISResource(IRISRepository repository) {
+    public IrisResource(IrisRepository repository) {
         this.repository = repository;
     }
     
     @Override
-    public List<IRIS> irisDataByDtxsid(String dtxsid) {
+    public List<Iris> irisDataByDtxsid(String dtxsid) {
         log.debug("all IRIS data = {}", dtxsid);
         
-        List<IRIS> data = repository.findByDtxsid(dtxsid);
+        List<Iris> data = repository.findByDtxsid(dtxsid);
         
         return data;
     }

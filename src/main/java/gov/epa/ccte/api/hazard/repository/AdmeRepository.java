@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.transaction.annotation.Transactional;
 
-import gov.epa.ccte.api.hazard.domain.ADME;
+import gov.epa.ccte.api.hazard.domain.Adme;
 import gov.epa.ccte.api.hazard.projection.CcdADME;
 
 @SuppressWarnings("unused")
 @RepositoryRestResource(exported = false)
-public interface ADMERepository extends JpaRepository<ADME, Integer>{
+public interface AdmeRepository extends JpaRepository<Adme, Integer>{
 
     @Transactional(readOnly = true)
     <T>List<T> findByDtxsid(String dtxsid, Class<T> type);
