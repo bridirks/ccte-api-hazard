@@ -16,7 +16,7 @@ public class HawcResource implements HawcApi{
 
     private final HawcRepository repository;
     
-    public HawcResource(HAWCRepository repository) {
+    public HawcResource(HawcRepository repository) {
         this.repository = repository;
     }
     
