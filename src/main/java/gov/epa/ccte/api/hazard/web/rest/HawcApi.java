@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import gov.epa.ccte.api.hazard.domain.HAWC;
+import gov.epa.ccte.api.hazard.domain.Hawc;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "HAWC Resource",
         description = "API endpoints for collecting CCD - EPA HAWC link mapper for specified chemical identifier (DTXSID).")
 @SecurityRequirement(name = "api_key")
-public interface HAWCApi {
+public interface HawcApi {
 
     /**
      * {@code GET  hazard/hawc/search/by-dtxsid/{dtxsid} : get CCD - EPA HAWC link mapper for the "dtxsid".
@@ -37,6 +37,6 @@ public interface HAWCApi {
                     schema = @Schema(oneOf = { HAWC.class}))),
     })
     @RequestMapping(value = "hazard/hawc/search/by-dtxsid/{dtxsid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    List<HAWC> hawcDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
+    List<Hawc> hawcDataByDtxsid(@Parameter(required = true, description = "DSSTox Substance Identifier", example = "DTXSID7020182") 
     						@PathVariable("dtxsid") String dtxsid);
 }
