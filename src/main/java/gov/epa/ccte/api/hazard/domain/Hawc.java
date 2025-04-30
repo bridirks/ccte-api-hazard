@@ -15,10 +15,10 @@ import lombok.Setter;
 @Setter
 @Schema(description = "EPA Health Assessment Workspace Collaborative (HAWC). EPA HAWC is an interactive, expert-driven, content management system for EPA health and environmental risk assessment programs that is intended to promote transparency, data usability, and understanding of the data and decisions supporting health and environmental assessments. Specifically, EPA HAWC is an application that allows the data and decisions supporting an assessment to be evaluated and managed in modules (e.g., study evaluation, summary study data) that can then be publicly accessed online.")
 @Table(name = "mv_hawc_ccd_map", schema = "hawc")
-public class HAWC {
+public class Hawc {
 
 	@Id
-    @NotNull
+   	@NotNull
 	@Column(name = "assessment_id")
 	private Integer assessmentId;
 	
