@@ -10,7 +10,7 @@ import gov.epa.ccte.api.hazard.domain.Hawc;
 
 @SuppressWarnings("unused")
 @RepositoryRestResource(exported = false)
-public interface HAWCRepository extends JpaRepository<Hawc, Integer>{
+public interface HawcRepository extends JpaRepository<Hawc, Integer>{
 
     @Transactional(readOnly = true)
     <T>List<T> findByDtxsid(String dtxsid);
